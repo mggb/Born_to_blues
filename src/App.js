@@ -1,28 +1,57 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// @flow
 
-class App extends Component {
+import React, { Component } from "react";
+import "./App.css";
+import { withNamespaces } from "react-i18next";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// Components
+import Home from "./components/home/index";
+import MusicStyle from "./components/musicStyle/index";
+import MusicStyleDetails from "./components/musicStyleDetails/index";
+
+const AppRouter = (translate: string => string) => (
+  <Router>
+    <div>
+      <Route
+        exact
+        path="/"
+        render={props => (
+          <Home paramsRouter={props} translateFunction={translate} />
+        )}
+      />
+      <Route
+        exact
+        path="/about/:musicStyle"
+        render={props => (
+          <MusicStyle paramsRouter={props} translateFunction={translate} />
+        )}
+      />
+      <Route
+        exact
+        path="/about/:musicStyle/:musicStyleDetail"
+        render={props => (
+          <MusicStyleDetails
+            paramsRouter={props}
+            translateFunction={translate}
+          />
+        )}
+      />
+    </div>
+  </Router>
+);
+
+type Props = {
+  t: string => string
+};
+type State = {};
+
+class App extends Component<Props, State> {
+  state = {};
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    const { t } = this.props;
+    return <AppRouter translate={t} />;
   }
 }
 
-export default App;
+export default withNamespaces()(App);
