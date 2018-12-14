@@ -41,11 +41,11 @@ const AppRouter = (translate: string => string) => (
         exact
         path="/:musicStyle/:musicStyleDetail"
         render={props => (
-          <MusicStyleDetails
-            paramsRouter={props}
-            translateFunction={translate}
-          />
-        )}
+            <MusicStyleDetails
+              paramsRouter={props}
+              translateFunction={translate}
+            />
+          )}
       />
     </div>
   </Router>

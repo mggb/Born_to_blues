@@ -2,23 +2,27 @@ import React from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import MusicStyleDetailsContainer from "./MusicStyleDetailsContainer";
+import MusicStyleContainer from "../MusicStyleContainer";
 
 configure({ adapter: new Adapter() });
 
 it("Renders MusicStyleContainer without crashing", () => {
-  const props = {
-    paramsRouter: { match: { params: { musicStyleDetail: "artists" } } }
-  };
   const translateFunction = jest.fn();
+  const paramsRouter = {
+    paramsRouter: {
+      match: {
+        params: { musicStyle: "jazz" }
+      }
+    }
+  };
   shallow(
     <Router>
       <Route
         exact
-        path="/:musicStyle/:musicStyleDetail"
+        path="/:musicStyle"
         render={() => (
-          <MusicStyleDetailsContainer
-            paramsRouter={props}
+          <MusicStyleContainer
+            paramsRouter={paramsRouter}
             translateFunction={translateFunction}
           />
         )}
