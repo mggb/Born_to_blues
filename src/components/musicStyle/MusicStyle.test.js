@@ -11,7 +11,7 @@ it("Renders MusicStyleContainer without crashing", () => {
   const paramsRouter = {
     paramsRouter: {
       match: {
-        params: { musicStyle: "rock" }
+        params: { musicStyle: "jazz" }
       }
     }
   };
