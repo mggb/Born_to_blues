@@ -1,16 +1,18 @@
 import React from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import MusicStyleComponent from "./MusicStyleComponent";
+import MusicStyleDetailsContainer from "../MusicStyleDetailsContainer";
 
 configure({ adapter: new Adapter() });
 
 it("Renders MusicStyleContainer without crashing", () => {
-  const musicStyle = "rock";
+  const props = {
+    match: { params: { musicStyleDetail: "artists" } }
+  };
   const translateFunction = jest.fn();
   shallow(
-    <MusicStyleComponent
-      params={musicStyle}
+    <MusicStyleDetailsContainer
+      paramsRouter={props}
       translateFunction={translateFunction}
     />
   );

@@ -1,4 +1,4 @@
-# Born_to_Blues [![CircleCI](https://circleci.com/gh/ayshiff/Born_to_blues.svg?style=svg)](https://circleci.com/gh/ayshiff/Born_to_blues) [![Coverage Status](https://coveralls.io/repos/github/ayshiff/Born_to_blues/badge.svg)](https://coveralls.io/github/ayshiff/Born_to_blues)
+# Born_to_Blues [![CircleCI](https://circleci.com/gh/ayshiff/Born_to_blues.svg?style=svg)](https://circleci.com/gh/ayshiff/Born_to_blues) [![Coverage Status](https://coveralls.io/repos/github/ayshiff/Born_to_blues/badge.svg?branch=master)](https://coveralls.io/github/ayshiff/Born_to_blues?branch=master)
 
 Clone the project :
 ```

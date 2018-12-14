@@ -26,6 +26,7 @@ const MusicStyleContainer = (props: Props) => {
     },
     translateFunction
   } = props;
+
   return (
     <MusicStyleDetailsComponent
       translateFunction={translateFunction}
