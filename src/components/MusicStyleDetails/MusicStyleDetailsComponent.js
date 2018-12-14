@@ -40,9 +40,17 @@ export default class MusicStyleDetailsComponent extends Component<
             <h2> Details: {pointFreeUpperCase(params.musicStyleDetail)}</h2>
             <NavigationBar />
 
-            {params.musicStyle !== "blues"
-              ? NavigationDetails(MUSIC_DETAILS, params.musicStyle)
-              : NavigationDetails(BLUES_DETAILS, params.musicStyle)}
+            {params.musicStyle !== "blues" ? (
+              <NavigationDetails
+                arrayElement={MUSIC_DETAILS}
+                musicStyle={params.musicStyle}
+              />
+            ) : (
+              <NavigationDetails
+                arrayElement={BLUES_DETAILS}
+                musicStyle={params.musicStyle}
+              />
+            )}
           </div>
         )}
       </Context.Consumer>

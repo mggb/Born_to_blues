@@ -40,9 +40,17 @@ export default class MusicStyleComponent extends Component<Props, State> {
               <Link to="/">Home</Link>
             </li>
             <h2> Music Style: {pointFreeUpperCase(params)}</h2>
-            {params === "blues"
-              ? NavigationDetails(BLUES_DETAILS, params)
-              : NavigationDetails(MUSIC_DETAILS, params)}
+            {params === "blues" ? (
+              <NavigationDetails
+                arrayElement={BLUES_DETAILS}
+                musicStyle={params}
+              />
+            ) : (
+              <NavigationDetails
+                arrayElement={MUSIC_DETAILS}
+                musicStyle={params}
+              />
+            )}
             <NavigationBar />
           </div>
         )}
