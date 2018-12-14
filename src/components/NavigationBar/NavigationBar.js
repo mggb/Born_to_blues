@@ -22,7 +22,13 @@ export const NavigationBar = () => (
 /**
  *  Navigation Details Component
  */
-export const NavigationDetails = ({ arrayElement, musicStyle }) =>
+export const NavigationDetails = ({
+  arrayElement,
+  musicStyle
+}: {
+  arrayElement: Array<string>,
+  musicStyle: string
+}): Array<any> =>
   arrayElement.map(detail => (
     <li key={detail}>
       <Link to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}>
