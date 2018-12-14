@@ -3,7 +3,7 @@ import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { NavigationBar, NavigationDetails } from "../NavigationBar";
 
-const MUSIC_ARRAY = ["rock", "jazz"];
+const MUSIC_ARRAY = ["rock", "jazz", "blues"];
 
 const MUSIC_STYLE = "rock";
 
