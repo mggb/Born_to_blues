@@ -26,6 +26,14 @@
     "eject": "react-scripts eject",
     "coverage": "react-scripts test --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/components/**/*.{js,jsx}",
+      "src/utils/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
