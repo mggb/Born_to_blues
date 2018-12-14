@@ -1,5 +1,6 @@
 import React from "react";
 import MusicStyle from "./MusicStyleComponent";
+import "./styles/MusicStyleContainer.css";
 
 type Props = {
   paramsRouter: {
@@ -11,6 +12,10 @@ type Props = {
   },
   translateFunction: string => string
 };
+
+/**
+ *  Music Style Container
+ */
 
 const MusicStyleContainer = (props: Props) => {
   const {

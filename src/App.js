@@ -1,14 +1,25 @@
-// @flow
-
 import React, { Component } from "react";
 import "./App.css";
 import { withNamespaces } from "react-i18next";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// Components
-import Home from "./components/home/index";
-import MusicStyle from "./components/musicStyle/index";
-import MusicStyleDetails from "./components/musicStyleDetails/index";
 
+// Import Components
+import Home from "./components/Home/index";
+import MusicStyle from "./components/MusicStyle/index";
+import MusicStyleDetails from "./components/MusicStyleDetails/index";
+
+/** Here we predefined to create context */
+
+export const Context = React.createContext();
+
+const contextValue = {
+  MUSIC_DETAILS: ["artists", "similarities", "anecdotes", "blues"],
+  BLUES_DETAILS: ["artists", "anecdotes", "impact", "origine", "themes"]
+};
+
+/**
+ *  App basic router
+ */
 const AppRouter = (translate: string => string) => (
   <Router>
     <div>
@@ -21,14 +32,14 @@ const AppRouter = (translate: string => string) => (
       />
       <Route
         exact
-        path="/about/:musicStyle"
+        path="/:musicStyle"
         render={props => (
           <MusicStyle paramsRouter={props} translateFunction={translate} />
         )}
       />
       <Route
         exact
-        path="/about/:musicStyle/:musicStyleDetail"
+        path="/:musicStyle/:musicStyleDetail"
         render={props => (
           <MusicStyleDetails
             paramsRouter={props}
@@ -50,7 +61,11 @@ class App extends Component<Props, State> {
 
   render() {
     const { t } = this.props;
-    return <AppRouter translate={t} />;
+    return (
+      <Context.Provider value={contextValue}>
+        <AppRouter translate={t} />
+      </Context.Provider>
+    );
   }
 }
 

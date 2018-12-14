@@ -1,14 +1,23 @@
+// @flow
+
 import React from "react";
-import MusicStyleDetails from "./MusicStyleDetailsComponent";
+import MusicStyleDetailsComponent from "./MusicStyleDetailsComponent";
+import "./styles/MusicStyleDetailsContainer.css";
 
 type Props = {
   paramsRouter: {
     match: {
-      params: string
+      params: any
     }
   },
-  translateFunction: string => string
+  translateFunction: {
+    translate: string => string
+  }
 };
+
+/**
+ *  Music Details Container
+ */
 
 const MusicStyleContainer = (props: Props) => {
   const {
@@ -18,7 +27,10 @@ const MusicStyleContainer = (props: Props) => {
     translateFunction
   } = props;
   return (
-    <MusicStyleDetails translateFunction={translateFunction} params={params} />
+    <MusicStyleDetailsComponent
+      translateFunction={translateFunction}
+      params={params}
+    />
   );
 };
 

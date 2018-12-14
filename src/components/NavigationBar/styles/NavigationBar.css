@@ -1,0 +1,11 @@
+.navigation_container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 20px;
+    right: 20px;
+}
+
+.navigation_element {
+    margin-right: 30px;
+}

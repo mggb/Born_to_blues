@@ -1,10 +1,15 @@
+// @flow
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { map } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
+import "./styles/HomeComponent.css";
 
-const MUSIC_STYLES = ["rap", "pop", "jazz", "country", "blues", "rock"];
+/** List of music styles */
+const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
 
+/** List of music styles formatted to be Pascal Case */
 const formattedMusicStyles = map(pointFreeUpperCase, MUSIC_STYLES);
 
 type Props = {
@@ -13,23 +18,33 @@ type Props = {
   }
 };
 
+/**
+ *  Home Component
+ */
+
 export default class HomeComponent extends Component<Props> {
-  renderMusicStyleLinks = () =>
-    MUSIC_STYLES.map((musicStyle, index) => (
+  /**
+   *  Function to create the music links
+   * @param {Array<string>} musicStyles - The array of music styles
+   * @returns {Array<any>}
+   */
+  renderMusicStyleLinks = (musicStyles: Array<string>): Array<any> =>
+    musicStyles.map((musicStyle, index) => (
       <li key={musicStyle}>
-        <Link to={`/about/${musicStyle}`}>{formattedMusicStyles[index]}</Link>
+        <Link to={`/${musicStyle}`}>{formattedMusicStyles[index]}</Link>
       </li>
     ));
 
   render() {
-    const {
-      translateFunction: { translate }
-    } = this.props;
+    // const {
+    //   translateFunction: { translate }
+    // } = this.props;
 
     return (
       <div>
-        <h2>Route Home {translate("test")}</h2>
-        <ul>{this.renderMusicStyleLinks()}</ul>
+        {/* To access data from i18n => {translate("test")} */}
+        <h2>Route Home </h2>
+        <ul>{this.renderMusicStyleLinks(MUSIC_STYLES)}</ul>
       </div>
     );
   }

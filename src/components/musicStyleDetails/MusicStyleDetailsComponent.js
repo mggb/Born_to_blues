@@ -1,10 +1,17 @@
+// @flow
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
-import NavigationBar from "../navigationBar/index";
+import { NavigationBar, NavigationDetails } from "../NavigationBar/index";
+import "./styles/MusicStyleDetailsComponent.css";
+import { Context } from "../../App";
 
 type Props = {
-  params: string,
+  params: {
+    musicStyle: string,
+    musicStyleDetail: string
+  },
   translateFunction: {
     translate: string => string
   }
@@ -22,15 +29,23 @@ export default class MusicStyleDetailsComponent extends Component<
     const { params } = this.props;
 
     return (
-      <div>
-        <li>
-          <Link to={`/about/${params.musicStyle}`}>
-            Back to {params.musicStyle}
-          </Link>
-        </li>
-        <h2> Details: {pointFreeUpperCase(params.musicStyleDetail)}</h2>
-        <NavigationBar />
-      </div>
+      <Context.Consumer>
+        {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
+          <div>
+            <li>
+              <Link to={`/${params.musicStyle}`}>
+                Back to {params.musicStyle}
+              </Link>
+            </li>
+            <h2> Details: {pointFreeUpperCase(params.musicStyleDetail)}</h2>
+            <NavigationBar />
+
+            {params.musicStyle !== "blues"
+              ? NavigationDetails(MUSIC_DETAILS, params.musicStyle)
+              : NavigationDetails(BLUES_DETAILS, params.musicStyle)}
+          </div>
+        )}
+      </Context.Consumer>
     );
   }
 }

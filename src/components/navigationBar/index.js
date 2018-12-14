@@ -1,3 +1,3 @@
-import NavigationBar from "./NavigationBar";
+import { NavigationDetails, NavigationBar } from "./NavigationBar";
 
-export default NavigationBar;
+export { NavigationDetails, NavigationBar };

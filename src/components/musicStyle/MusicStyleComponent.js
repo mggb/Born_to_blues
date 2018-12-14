@@ -1,11 +1,11 @@
+// @flow
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
-import NavigationBar from "../navigationBar/index";
-
-const MUSIC_DETAILS = ["artists", "similarities", "anecdotes"];
-
-const BLUES_DETAILS = ["artists", "anecdotes", "impact", "origine", "themes"];
+import { NavigationBar, NavigationDetails } from "../NavigationBar/index";
+import "./styles/MusicStyleComponent.css";
+import { Context } from "../../App";
 
 type Props = {
   params: string,
@@ -16,31 +16,37 @@ type Props = {
 
 type State = {};
 
+/**
+ *  Music Style Component
+ */
+
 export default class MusicStyleComponent extends Component<Props, State> {
   state = {};
 
-  listDetails = (arrayElement, musicStyle) =>
-    arrayElement.map(detail => (
-      <li key={detail}>
-        <Link to={`/about/${musicStyle}/${detail}`}>
-          {pointFreeUpperCase(detail)}
-        </Link>
-      </li>
-    ));
+  /**
+   *  Function to create the detail list
+   * @param {Array<string>} arrayElement - The array of blues categories
+   * @param {string} musicStyle - The music style param in the url.
+   */
 
   render() {
     const { params } = this.props;
+
     return (
-      <div>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <h2> Music Style: {pointFreeUpperCase(params)}</h2>
-        {params === "blues"
-          ? this.listDetails(BLUES_DETAILS, params)
-          : this.listDetails(MUSIC_DETAILS, params)}
-        <NavigationBar />
-      </div>
+      <Context.Consumer>
+        {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
+          <div>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <h2> Music Style: {pointFreeUpperCase(params)}</h2>
+            {params === "blues"
+              ? NavigationDetails(BLUES_DETAILS, params)
+              : NavigationDetails(MUSIC_DETAILS, params)}
+            <NavigationBar />
+          </div>
+        )}
+      </Context.Consumer>
     );
   }
 }
