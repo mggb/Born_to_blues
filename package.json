@@ -18,7 +18,7 @@
   },
   "scripts": {
     "flow": "flow",
-    "lint": "eslint '**/*.{js,jsx}' --quiet",
+    "lint": "eslint 'src/*.{js,jsx}' --quiet",
     "prettier": "prettier --single-quote --write \"src/**/*.js\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
