@@ -3,7 +3,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
-import { NavigationBar, NavigationDetails } from "../NavigationBar/index";
+import {
+  NavigationBar,
+  NavigationDetails,
+  NavigationSubDetails
+} from "../NavigationBar/index";
 import "./styles/MusicStyleDetailsComponent.css";
 import { Context } from "../../App";
 
@@ -49,6 +53,14 @@ export default class MusicStyleDetailsComponent extends Component<
               <NavigationDetails
                 arrayElement={BLUES_DETAILS}
                 musicStyle={params.musicStyle}
+              />
+            )}
+            {params.musicStyleDetail === "similarities" && (
+              <NavigationSubDetails
+                // Example array of sub-details
+                arrayElement={["instruments", "electric-guitar"]}
+                musicStyle={params.musicStyle}
+                musicDetail={params.musicStyleDetail}
               />
             )}
           </div>

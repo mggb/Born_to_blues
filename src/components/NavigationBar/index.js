@@ -1,3 +1,7 @@
-import { NavigationDetails, NavigationBar } from "./NavigationBar";
+import {
+  NavigationDetails,
+  NavigationBar,
+  NavigationSubDetails
+} from "./NavigationBar";
 
-export { NavigationDetails, NavigationBar };
+export { NavigationDetails, NavigationBar, NavigationSubDetails };

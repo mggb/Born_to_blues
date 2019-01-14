@@ -36,3 +36,23 @@ export const NavigationDetails = ({
       </Link>
     </li>
   ));
+
+/**
+ *  Navigation Details Component
+ */
+export const NavigationSubDetails = ({
+  arrayElement,
+  musicStyle,
+  musicDetail
+}: {
+  arrayElement: Array<string>,
+  musicStyle: string,
+  musicDetail: string
+}): Array<any> =>
+  arrayElement.map(detail => (
+    <li key={detail}>
+      <Link to={`/${musicStyle}/${musicDetail}/${detail}`}>
+        {pointFreeUpperCase(detail)}
+      </Link>
+    </li>
+  ));
