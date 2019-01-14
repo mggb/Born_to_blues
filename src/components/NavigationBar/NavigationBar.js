@@ -46,7 +46,8 @@ export const NavigationSubDetails = ({
   musicDetail
 }: {
   arrayElement: Array<string>,
-  musicStyle: string
+  musicStyle: string,
+  musicDetail: string
 }): Array<any> =>
   arrayElement.map(detail => (
     <li key={detail}>

@@ -13,7 +13,8 @@ import { Context } from "../../App";
 type Props = {
   params: {
     musicStyle: string,
-    musicStyleDetail: string
+    musicStyleDetail: string,
+    musicStyleSubDetail: string
   },
   translateFunction: {
     translate: string => string
@@ -30,7 +31,7 @@ export default class MusicStyleSubDetailsComponent extends Component<
 > {
   state = {};
 
-  filterNavSubDetails = element => {
+  filterNavSubDetails = (element: any) => {
     SUB_DETAILS.filter(item => item !== element);
   };
 
