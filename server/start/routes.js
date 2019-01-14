@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,16 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
+const Route = use("Route");
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.get("/", () => {
+  return { greeting: "Hello world in JSON" };
+});
+
+Route.group(() => {
+  Route.post("music-style", "MusicStyleController.create");
+  Route.get("music-style", "MusicStyleController.index");
+  Route.get("music-style/:id", "MusicStyleController.fetchOne");
+  Route.put("music-style/:id", "MusicStyleController.update");
+  Route.delete("music-style/:id", "MusicStyleController.delete");
+}).prefix("api");
