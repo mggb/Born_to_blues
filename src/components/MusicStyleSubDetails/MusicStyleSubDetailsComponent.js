@@ -1,8 +1,6 @@
 // @flow
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { remove } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import {
   NavigationBar,
