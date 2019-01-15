@@ -1,4 +1,4 @@
-// @flow
+// 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Player } from 'video-react';
@@ -14,7 +14,7 @@ import country from './assets/img/vinyle-country.png';
 import rock from './assets/img/vinyle-rock.png';
 
 /** List of music styles */
-const MUSIC_STYLES_LOGO: Array = [
+const MUSIC_STYLES_LOGO: Array<any> = [
   {
     logo: rap,
     title: "rap"
@@ -64,7 +64,7 @@ export default class HomeComponent extends Component<Props> {
    * @param {Array} musicStylesLogo - The array of music styles logos
    * @returns {Array<any>}
    */
-  renderMusicStyleLinks = (musicStylesLogo: Array): Array<any> =>
+  renderMusicStyleLinks = (musicStylesLogo: Array<any>): Array<any> =>
     musicStylesLogo.map((musicStyleLogo) => (
     <li key={musicStyleLogo.title}>
       <Link
