@@ -1,13 +1,11 @@
 // @flow
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { map } from "ramda";
-import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import "./styles/HomeComponent.css";
 import logo from "./assets/img/logo.png"
-// import "node_modules/video-react/dist/video-react.css";
 import { Player } from 'video-react';
 import homeVideo from './assets/video/video_introduction.mp4';
+import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 
 // import music_styles_logo
 import rap from './assets/img/vinyle-rap.png';
@@ -57,6 +55,10 @@ export default class HomeComponent extends Component<Props> {
     displayVideo: true
   }
 
+  componentWillMount(): void {
+    this.styleNotOver();
+  }
+
   /**
    *  Function to create the music links
    * @param {Array} musicStylesLogo - The array of music styles logos
@@ -70,7 +72,7 @@ export default class HomeComponent extends Component<Props> {
         onMouseEnter={() => (this.styleOver(musicStyleLogo.title))}
         onMouseLeave={this.styleNotOver}
       >
-      <img src={musicStyleLogo.logo} alt={musicStyleLogo.title + " style logo"}/>
+      <img src={musicStyleLogo.logo} alt={`${musicStyleLogo.title} style logo`}/>
       </Link>
     </li>
   ));
@@ -95,35 +97,36 @@ export default class HomeComponent extends Component<Props> {
     })
   }
 
+  /**
+   * function called 'onClick' on skip video text
+   * doesn't display the video section
+   */
   skipVideo(){
     this.setState({
       displayVideo: false
     })
   }
 
-  componentWillMount(): void {
-    this.styleNotOver();
-  }
-
   render() {
+    const {homeTitle, displayVideo} = this.state;
     // const {
     //   translateFunction: { translate }
     // } = this.props;
 
     return (
       <div id="home">
-        <img id={"logo"} src={logo} alt="Born to Blues logo"/>
+        <img id="logo" src={logo} alt="Born to Blues logo"/>
         {/* To access data from i18n => {translate("test")} */}
         <ul>{this.renderMusicStyleLinks(MUSIC_STYLES_LOGO)}</ul>
-        <h1>{this.state.homeTitle}</h1>
-        {this.state.displayVideo && (
-          <section id={"playerWrap"}>
+        <h1>{homeTitle}</h1>
+        {displayVideo && (
+          <section id="playerWrap">
             <div>
               <Player
                 playsInline
                 src={homeVideo}
               />
-              <button className="button" onClick={this.skipVideo}>Skip Video</button>
+              <p className="skip" onClick={this.skipVideo}>Skip Video</p>
             </div>
           </section>
         )}
