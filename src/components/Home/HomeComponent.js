@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./styles/HomeComponent.css";
-import logo from "./assets/img/logo.png"
 import { Player } from 'video-react';
-import homeVideo from './assets/video/video_introduction.mp4';
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
+import logo from "./assets/img/logo.png"
+import "./styles/HomeComponent.css";
+import homeVideo from './assets/video/video_introduction.mp4';
 
 // import music_styles_logo
 import rap from './assets/img/vinyle-rap.png';
@@ -126,7 +126,7 @@ export default class HomeComponent extends Component<Props> {
                 playsInline
                 src={homeVideo}
               />
-              <p className="skip" onClick={this.skipVideo}>Skip Video</p>
+              <button type="button" className="skip" onClick={this.skipVideo}>Skip Video</button>
             </div>
           </section>
         )}

@@ -12,9 +12,12 @@
     left: 0;
 }
 #home #playerWrap .skip{
+    border: none;
+    background: none;
     color: #fff;
     cursor: pointer;
-    text-align: center;
+    margin: 20px auto;
+    display: block;
 }
 #home #playerWrap > div{
     width: 70%;
