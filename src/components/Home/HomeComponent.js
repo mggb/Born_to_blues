@@ -1,16 +1,36 @@
 // @flow
-
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { map } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import "./styles/HomeComponent.css";
+import logo from "./assets/img/logo.png"
+
+// import music_styles_logo
+import rap from './assets/img/vinyle-rap.png';
+import jazz from './assets/img/vinyle-jazz.png';
+import country from './assets/img/vinyle-country.png';
+import rock from './assets/img/vinyle-rock.png';
 
 /** List of music styles */
-const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
-
-/** List of music styles formatted to be Pascal Case */
-const formattedMusicStyles = map(pointFreeUpperCase, MUSIC_STYLES);
+const MUSIC_STYLES_LOGO: Array = [
+  {
+    logo: rap,
+    title: "rap"
+  },
+  {
+    logo: jazz,
+    title: "jazz"
+  },
+  {
+    logo: country,
+    title: "country"
+  },
+  {
+    logo: rock,
+    title: "rock"
+  }
+];
 
 type Props = {
   translateFunction: {
@@ -23,17 +43,53 @@ type Props = {
  */
 
 export default class HomeComponent extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.styleOver = this.styleOver.bind(this);
+    this.styleNotOver = this.styleNotOver.bind(this);
+  }
+
   /**
    *  Function to create the music links
-   * @param {Array<string>} musicStyles - The array of music styles
+   * @param {Array} musicStylesLogo - The array of music styles logos
    * @returns {Array<any>}
    */
-  renderMusicStyleLinks = (musicStyles: Array<string>): Array<any> =>
-    musicStyles.map((musicStyle, index) => (
-      <li key={musicStyle}>
-        <Link to={`/${musicStyle}`}>{formattedMusicStyles[index]}</Link>
-      </li>
-    ));
+  renderMusicStyleLinks = (musicStylesLogo: Array): Array<any> =>
+    musicStylesLogo.map((musicStyleLogo) => (
+    <li key={musicStyleLogo.title}>
+      <Link
+        to={`/${musicStyleLogo.title}`}
+        onMouseEnter={() => (this.styleOver(musicStyleLogo.title))}
+        onMouseLeave={this.styleNotOver}
+      >
+      <img src={musicStyleLogo.logo} alt={musicStyleLogo.title + " style logo"}/>
+      </Link>
+    </li>
+  ));
+
+  /**
+   * function called 'onMouseEnter' on music style Link
+   * change h1 content
+   */
+  styleOver(title){
+    this.setState({
+      homeTitle: pointFreeUpperCase(title)
+    })
+  }
+
+  /**
+   * function called 'onMouseEnter' on music style Link
+   * change h1 content
+   */
+  styleNotOver(){
+    this.setState({
+      homeTitle: "Select your style"
+    })
+  }
+
+  componentWillMount(): void {
+    this.styleNotOver();
+  }
 
   render() {
     // const {
@@ -41,10 +97,11 @@ export default class HomeComponent extends Component<Props> {
     // } = this.props;
 
     return (
-      <div>
+      <div id="home">
+        <img id={"logo"} src={logo} alt="Born to Blues logo"/>
         {/* To access data from i18n => {translate("test")} */}
-        <h2>Route Home </h2>
-        <ul>{this.renderMusicStyleLinks(MUSIC_STYLES)}</ul>
+        <ul>{this.renderMusicStyleLinks(MUSIC_STYLES_LOGO)}</ul>
+        <h1>{this.state.homeTitle}</h1>
       </div>
     );
   }
