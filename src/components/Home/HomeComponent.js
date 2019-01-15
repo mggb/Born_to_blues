@@ -61,15 +61,15 @@ export default class HomeComponent extends Component<Props> {
 
   componentDidMount() {
     // subscribe state change
+    // eslint-disable-next-line
     this.refs.player.subscribeToStateChange(this.handleStateChange.bind(this));
   }
 
   /**
    * hide the video container when video's over
    * @param state
-   * @param prevState
    */
-  handleStateChange(state, prevState) {
+  handleStateChange(state) {
     if (state.ended){
       this.skipVideo()
     }
@@ -142,6 +142,7 @@ export default class HomeComponent extends Component<Props> {
                 autoPlay
                 playsInline
                 src={homeVideo}
+                // eslint-disable-next-line
                 ref="player"
               />
               <button type="button" className="skip" onClick={this.skipVideo}>Skip Video</button>
