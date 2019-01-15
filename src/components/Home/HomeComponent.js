@@ -1,4 +1,4 @@
-// 
+//
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Player } from 'video-react';
@@ -57,6 +57,22 @@ export default class HomeComponent extends Component<Props> {
 
   componentWillMount(): void {
     this.styleNotOver();
+  }
+
+  componentDidMount() {
+    // subscribe state change
+    this.refs.player.subscribeToStateChange(this.handleStateChange.bind(this));
+  }
+
+  /**
+   * hide the video container when video's over
+   * @param state
+   * @param prevState
+   */
+  handleStateChange(state, prevState) {
+    if (state.ended){
+      this.skipVideo()
+    }
   }
 
   /**
@@ -123,8 +139,10 @@ export default class HomeComponent extends Component<Props> {
           <section id="playerWrap">
             <div>
               <Player
+                autoPlay
                 playsInline
                 src={homeVideo}
+                ref="player"
               />
               <button type="button" className="skip" onClick={this.skipVideo}>Skip Video</button>
             </div>
