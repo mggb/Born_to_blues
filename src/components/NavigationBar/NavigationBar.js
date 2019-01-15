@@ -33,7 +33,7 @@ export const NavigationDetails = ({
     <li key={detail} className="wizzardElement">
         <Link to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}>
         {pointFreeUpperCase(detail)}
-        <div className="wizzard"></div>
+        <div className="wizzard"/>
       </Link>
     </li>
   ));
