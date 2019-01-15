@@ -41,22 +41,18 @@ export default class MusicStyleSubDetailsComponent extends Component<
       <Context.Consumer>
         {({ MUSIC_DETAILS }) => (
           <div>
-            <h2>
-              SubDetails: {pointFreeUpperCase(params.musicStyleSubDetail)}
-            </h2>
+            <h2> {pointFreeUpperCase(params.musicStyleSubDetail)}</h2>
             <NavigationBar />
-
-            <NavigationDetails
-              arrayElement={MUSIC_DETAILS}
-              musicStyle={params.musicStyle}
-            />
-
-            <h2>Sub details Navigation</h2>
             <NavigationSubDetails
               // Example array of sub-details
               arrayElement={SUB_DETAILS}
               musicStyle={params.musicStyle}
               musicDetail={params.musicStyleDetail}
+            />
+
+            <NavigationDetails
+              arrayElement={MUSIC_DETAILS}
+              musicStyle={params.musicStyle}
             />
           </div>
         )}

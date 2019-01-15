@@ -41,9 +41,9 @@ export default class HomeComponent extends Component<Props> {
     // } = this.props;
 
     return (
-      <div>
+      <div id="home">
         {/* To access data from i18n => {translate("test")} */}
-        <h2>Route Home </h2>
+        <h2>Born to blues </h2>
         <ul>{this.renderMusicStyleLinks(MUSIC_STYLES)}</ul>
       </div>
     );

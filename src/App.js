@@ -14,7 +14,7 @@ import MusicStyleSubDetails from "./components/MusicStyleSubDetails/index";
 export const Context = React.createContext();
 
 const contextValue = {
-  MUSIC_DETAILS: ["artists", "similarities", "anecdotes", "blues"],
+  MUSIC_DETAILS: ["artists", "links", "anecdotes", "blues"],
   BLUES_DETAILS: ["artists", "anecdotes", "impact", "origine", "themes"]
 };
 
@@ -23,7 +23,7 @@ const contextValue = {
  */
 const AppRouter = (translate: string => string) => (
   <Router>
-    <div>
+    <div id="router">
       <Route
         exact
         path="/"
