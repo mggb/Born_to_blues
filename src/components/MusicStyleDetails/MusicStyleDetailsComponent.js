@@ -41,29 +41,44 @@ export default class MusicStyleDetailsComponent extends Component<
                 Back to {params.musicStyle}
               </Link>
             </li>
-            <h2> Details: {pointFreeUpperCase(params.musicStyleDetail)}</h2>
             <NavigationBar />
-
-            {params.musicStyle !== "blues" ? (
-              <NavigationDetails
-                arrayElement={MUSIC_DETAILS}
-                musicStyle={params.musicStyle}
-              />
-            ) : (
-              <NavigationDetails
-                arrayElement={BLUES_DETAILS}
-                musicStyle={params.musicStyle}
-              />
-            )}
-            {params.musicStyleDetail === "similarities" && (
-              <NavigationSubDetails
-                // Example array of sub-details
-                arrayElement={["instruments", "electric-guitar"]}
-                musicStyle={params.musicStyle}
-                musicDetail={params.musicStyleDetail}
-              />
-            )}
-          </div>
+            <div className="currentStyle">
+                <div className="styleContainer">
+                    <div className="vinyleStyleContainer">
+                        <div className="vinyleStyleContent">
+                            <div className="">
+                                <h2 className="">{pointFreeUpperCase(params.musicStyleDetail)}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="contentContainer">
+                        <div className="">
+                          {params.musicStyleDetail === "links" && (
+                            <NavigationSubDetails
+                              // Example array of sub-details
+                              arrayElement={["instruments", "electric-guitar"]}
+                              musicStyle={params.musicStyle}
+                              musicDetail={params.musicStyleDetail}
+                            />
+                          )}
+                        </div>
+                    </div>
+                </div>
+            <div className="wizzardNavContainer">
+                {params === "blues" ? (
+                  <NavigationDetails
+                    arrayElement={BLUES_DETAILS}
+                    musicStyle={params}
+                  />
+                ) : (
+                  <NavigationDetails
+                    arrayElement={MUSIC_DETAILS}
+                    musicStyle={params}
+                  />
+                )}
+            </div>
+          </div> 
+        </div>
         )}
       </Context.Consumer>
     );
