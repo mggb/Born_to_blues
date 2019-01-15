@@ -3,6 +3,29 @@
     position: relative;
     background: #111;
 }
+#home #playerWrap{
+    width: 100%;
+    height: 100%;
+    background: #111;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#home #playerWrap .button{
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+}
+#home #playerWrap > div{
+    width: 70%;
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
 #home #logo{
     position: absolute;
     top: 40px;

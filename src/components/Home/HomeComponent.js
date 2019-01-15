@@ -5,6 +5,9 @@ import { map } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import "./styles/HomeComponent.css";
 import logo from "./assets/img/logo.png"
+// import "node_modules/video-react/dist/video-react.css";
+import { Player } from 'video-react';
+import homeVideo from './assets/video/video_introduction.mp4';
 
 // import music_styles_logo
 import rap from './assets/img/vinyle-rap.png';
@@ -47,6 +50,11 @@ export default class HomeComponent extends Component<Props> {
     super(props);
     this.styleOver = this.styleOver.bind(this);
     this.styleNotOver = this.styleNotOver.bind(this);
+    this.skipVideo = this.skipVideo.bind(this);
+  }
+
+  state = {
+    displayVideo: true
   }
 
   /**
@@ -87,6 +95,12 @@ export default class HomeComponent extends Component<Props> {
     })
   }
 
+  skipVideo(){
+    this.setState({
+      displayVideo: false
+    })
+  }
+
   componentWillMount(): void {
     this.styleNotOver();
   }
@@ -102,6 +116,17 @@ export default class HomeComponent extends Component<Props> {
         {/* To access data from i18n => {translate("test")} */}
         <ul>{this.renderMusicStyleLinks(MUSIC_STYLES_LOGO)}</ul>
         <h1>{this.state.homeTitle}</h1>
+        {this.state.displayVideo && (
+          <section id={"playerWrap"}>
+            <div>
+              <Player
+                playsInline
+                src={homeVideo}
+              />
+              <button className="button" onClick={this.skipVideo}>Skip Video</button>
+            </div>
+          </section>
+        )}
       </div>
     );
   }
