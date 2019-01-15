@@ -1,0 +1,19 @@
+.pochetteVinyleContainer{
+    display: flex;
+    justify-content: space-evenly;
+}
+.pochetteVinyle{
+    list-style: none;
+    background-image:url('../../../assets/img/vinyle-pochette.png');
+    background-size:180px 180px;
+    width:180px;
+    height:180px;
+}
+.pochetteVinyle li{
+    padding-top:40%;
+    padding-left:25%;
+}
+.pochetteVinyle li a{
+    color:black;
+    text-decoration: none;
+}
