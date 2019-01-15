@@ -7,13 +7,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/Home/index";
 import MusicStyle from "./components/MusicStyle/index";
 import MusicStyleDetails from "./components/MusicStyleDetails/index";
+import MusicStyleSubDetails from "./components/MusicStyleSubDetails/index";
 
 /** Here we predefined to create context */
 
 export const Context = React.createContext();
 
 const contextValue = {
-  MUSIC_DETAILS: ["artists", "similarities", "anecdotes", "blues"],
+  MUSIC_DETAILS: ["artists", "links", "anecdotes", "blues"],
   BLUES_DETAILS: ["artists", "anecdotes", "impact", "origine", "themes"]
 };
 
@@ -22,7 +23,7 @@ const contextValue = {
  */
 const AppRouter = (translate: string => string) => (
   <Router>
-    <div>
+    <div id="router">
       <Route
         exact
         path="/"
@@ -41,11 +42,21 @@ const AppRouter = (translate: string => string) => (
         exact
         path="/:musicStyle/:musicStyleDetail"
         render={props => (
-            <MusicStyleDetails
-              paramsRouter={props}
-              translateFunction={translate}
-            />
-          )}
+          <MusicStyleDetails
+            paramsRouter={props}
+            translateFunction={translate}
+          />
+        )}
+      />
+      <Route
+        exact
+        path="/:musicStyle/:musicStyleDetail/:musicStyleSubDetail"
+        render={props => (
+          <MusicStyleSubDetails
+            paramsRouter={props}
+            translateFunction={translate}
+          />
+        )}
       />
     </div>
   </Router>
