@@ -29,7 +29,7 @@ const AnecdoteComponent = (props: Props) => (
                               <p>
                                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid dicta, doloribus fugit magni nesciunt!
                               </p>
-                              <button><i className="fas fa-play"/></button>
+                              <button type="button"><i className="fas fa-play"/></button>
                           </div>
                       </div>
                       <div className="video">

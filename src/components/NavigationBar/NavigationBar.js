@@ -32,9 +32,7 @@ export const NavigationDetails = ({
 }): Array<any> =>
   arrayElement.map(detail => (  
     <li key={detail}>
-        <Link to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}>
-        {/*{pointFreeUpperCase(detail)}*/}
-      </Link>
+        <Link to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}/>
     </li>
   ));
 

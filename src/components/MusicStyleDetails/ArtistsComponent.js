@@ -9,7 +9,6 @@ import { Context } from "../../App";
 // import musician logo
 import hendrix from '../../assets/img/vinyle-jimmi-hendrix.png';
 import presley from '../../assets/img/vinyle-elvis-presley.png';
-import berry from '../../assets/img/vinyle-elvis-presley.png';
 import stones from '../../assets/img/vinyle-rolling-stones.png';
 
 /** Fake data */
@@ -23,7 +22,7 @@ const MUSICIANS: Array<any> = [
         name: "presley"
     },
     {
-        logo: berry,
+        logo: presley,
         name: "berry"
     },
     {
