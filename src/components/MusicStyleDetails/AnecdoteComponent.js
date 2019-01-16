@@ -36,13 +36,13 @@ const AnecdoteComponent = (props: Props) => (
                             <NavigationSubDetails
                                 musicStyle={props.musicStyle}
                                 musicDetail={props.musicStyleDetail}
-                                arrayElement={["Jimi Hendrix", "Chuck Berry", "The Rollings Stones", "Elvis Presley"]}
+                                arrayElement={["Ducky Walk", "Rolling Stones", "Robert Plant"]}
                             />
                         </div>
                     </div>
                 </div>
                 <div className="wizzardNavContainer">
-                    {props === "blues" ? (
+                    {props.musicStyle === "blues" ? (
                         <NavigationDetails
                             arrayElement={BLUES_DETAILS}
                             musicStyle={props.musicStyle}

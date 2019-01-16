@@ -36,13 +36,13 @@ const LinksComponent = (props: Props) => (
                             <NavigationSubDetails
                                 musicStyle={props.musicStyle}
                                 musicDetail={props.musicStyleDetail}
-                                arrayElement={["Jimi Hendrix", "Chuck Berry", "The Rollings Stones", "Elvis Presley"]}
+                                arrayElement={["Electric Guitar", "Rythmes and Blues", "Rock'n Teenagers"]}
                             />
                         </div>
                     </div>
                 </div>
                 <div className="wizzardNavContainer">
-                    {props === "blues" ? (
+                    {props.musicStyle === "blues" ? (
                         <NavigationDetails
                             arrayElement={BLUES_DETAILS}
                             musicStyle={props.musicStyle}

@@ -14,6 +14,9 @@ import { Context } from "../../App";
 import ArtistsComponent from "./ArtistsComponent";
 import AnnecdoteComponent from "./AnecdoteComponent";
 import LinksComponent from './LinksComponent';
+import ImpactComponent from './ImpactComponent';
+import OriginComponent from './OrigineComponent';
+import ThemeComponent from './ThemeComponent';
 
 type Props = {
   params: {
@@ -30,7 +33,7 @@ type State = {};
 export default class MusicStyleDetailsComponent extends Component<
   Props,
   State
-> {
+  > {
   state = {};
 
   render() {
@@ -47,24 +50,42 @@ export default class MusicStyleDetailsComponent extends Component<
             </li>
             <NavigationBar />
             {params.musicStyleDetail === "artists" && (
-              <ArtistsComponent 
-              musicStyle = {params.musicStyle}
-              musicStyleDetail = {params.musicStyleDetail}
-            />
+              <ArtistsComponent
+                musicStyle={params.musicStyle}
+                musicStyleDetail={params.musicStyleDetail}
+              />
             )}
             {params.musicStyleDetail === "anecdotes" && (
               <AnnecdoteComponent
-                musicStyle = {params.musicStyle}
-                musicStyleDetail = {params.musicStyleDetail}
+                musicStyle={params.musicStyle}
+                musicStyleDetail={params.musicStyleDetail}
               />
             )}
             {params.musicStyleDetail === "links" && (
               <LinksComponent
-                musicStyle = {params.musicStyle}
-                musicStyleDetail = {params.musicStyleDetail}
+                musicStyle={params.musicStyle}
+                musicStyleDetail={params.musicStyleDetail}
               />
-            )}              
-        </div>
+            )}
+            {params.musicStyle === "blues" && params.musicStyleDetail === "impact" ?
+              <ImpactComponent
+                musicStyle={params.musicStyle}
+                musicStyleDetail={params.musicStyleDetail}
+              />
+              : null}
+            {params.musicStyle === "blues" && params.musicStyleDetail === "origine" ?
+              <OriginComponent
+                musicStyle={params.musicStyle}
+                musicStyleDetail={params.musicStyleDetail}
+              />
+              : null}
+            {params.musicStyle === "blues" && params.musicStyleDetail === "themes" ?
+              <ThemeComponent
+                musicStyle={params.musicStyle}
+                musicStyleDetail={params.musicStyleDetail}
+              />
+              : null}
+          </div>
         )}
       </Context.Consumer>
     );

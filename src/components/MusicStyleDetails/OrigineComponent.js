@@ -19,7 +19,7 @@ type Props = {
 };
 
 
-const ArtistsComponent = (props: Props) => (
+const OrigineComponent = (props: Props) => (
     <Context.Consumer>
         {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
             <div className="currentStyle">
@@ -38,6 +38,7 @@ const ArtistsComponent = (props: Props) => (
                                 musicDetail={props.musicStyleDetail}
                                 arrayElement={["Jimi Hendrix", "Chuck Berry", "The Rollings Stones", "Elvis Presley"]}
                             />
+                            <p>component Origine from Blues style</p>
                         </div>
                     </div>
                 </div>
@@ -58,4 +59,4 @@ const ArtistsComponent = (props: Props) => (
         )}
     </Context.Consumer>)
 
-export default ArtistsComponent
+export default OrigineComponent
