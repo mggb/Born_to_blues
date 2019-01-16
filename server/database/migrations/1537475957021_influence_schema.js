@@ -9,13 +9,10 @@ class InfluenceSchema extends Schema {
       table.increments().unsigned();
       table.string("name");
       table.string("img");
-      table.string("song");
       table.text("description");
-      table
-        .integer("related_song_id")
-        .unsigned()
-        .references("id")
-        .inTable("songs");
+
+      // Relationships
+      table.json("songs");
     });
   }
 

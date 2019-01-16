@@ -9,19 +9,14 @@ class MusicStyleSchema extends Schema {
       table.increments().unsigned();
       table.string("name");
       table.string("img");
-      table.text("anecdote");
       table.text("origin");
       table.text("theme");
-      table
-        .integer("related_description_id", 11)
-        .unsigned()
-        .references("id")
-        .inTable("descriptions");
-      table
-        .integer("related_influence_id", 11)
-        .unsigned()
-        .references("id")
-        .inTable("influences");
+      table.text("peach");
+
+      // Relationships
+      table.json("descriptions");
+      table.json("influences");
+      table.json("anecdotes");
     });
   }
 

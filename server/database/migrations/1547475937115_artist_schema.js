@@ -10,16 +10,10 @@ class ArtistSchema extends Schema {
       table.string("name");
       table.string("img");
       table.text("song");
-      table
-        .integer("related_description_id")
-        .unsigned()
-        .references("id")
-        .inTable("descriptions");
-      table
-        .integer("related_influence_id")
-        .unsigned()
-        .references("id")
-        .inTable("influences");
+
+      // Relationships
+      table.json("descriptions");
+      table.json("influences");
     });
   }
 
