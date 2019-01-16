@@ -1,14 +1,7 @@
 // @flow
-
 import React, { Component } from "react";
-import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
-import {
-  NavigationBar,
-  NavigationSubDetails,
-  NavigationDetails
-} from "../NavigationBar/index";
-import "./styles/MusicStyleSubDetailsComponent.css";
-import { Context } from "../../App";
+import SubLinksComponent from "./SubLinksComponent";
+import SubArtistsComponent from "./SubArtistsComponent";
 
 type Props = {
   params: {
@@ -28,7 +21,7 @@ const SUB_DETAILS = ["instruments", "electric-guitar"];
 export default class MusicStyleSubDetailsComponent extends Component<
   Props,
   State
-> {
+  > {
   state = {};
 
   filterNavSubDetails = (element: any) => {
@@ -38,25 +31,24 @@ export default class MusicStyleSubDetailsComponent extends Component<
   render() {
     const { params } = this.props;
     return (
-      <Context.Consumer>
-        {({ MUSIC_DETAILS }) => (
-          <div>
-            <h2> {pointFreeUpperCase(params.musicStyleSubDetail)}</h2>
-            <NavigationBar />
-            <NavigationSubDetails
-              // Example array of sub-details
-              arrayElement={SUB_DETAILS}
-              musicStyle={params.musicStyle}
-              musicDetail={params.musicStyleDetail}
-            />
-
-            <NavigationDetails
-              arrayElement={MUSIC_DETAILS}
-              musicStyle={params.musicStyle}
-            />
-          </div>
+      <section>
+        {params.musicStyleDetail === "artists" && (
+          <SubArtistsComponent
+            arrayElement={SUB_DETAILS}
+            musicStyle={params.musicStyle}
+            musicDetail={params.musicStyleDetail}
+            musicStyleSubDetail={params.musicStyleSubDetail}
+          />
         )}
-      </Context.Consumer>
+        {params.musicStyleDetail === "links" && (
+          <SubLinksComponent
+            arrayElement={SUB_DETAILS}
+            musicStyle={params.musicStyle}
+            musicDetail={params.musicStyleDetail}
+            musicStyleSubDetail={params.musicStyleSubDetail}
+          />
+        )}
+      </section>
     );
   }
 }
