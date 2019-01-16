@@ -9,13 +9,8 @@ import { Context } from "../../App";
 // const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
 
 type Props = {
-    params: {
-        musicStyle: string,
-        musicStyleDetail: string
-    },
-    translateFunction: {
-        translate: string => string
-    }
+    musicStyle: string,
+    musicStyleDetail: string
 };
 
 

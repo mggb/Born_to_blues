@@ -2,12 +2,7 @@
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
-import {
-  NavigationBar,
-  NavigationDetails,
-  NavigationSubDetails
-} from "../NavigationBar/index";
+import { NavigationBar } from "../NavigationBar/index";
 import "./styles/MusicStyleDetailsComponent.css";
 import { Context } from "../../App";
 
