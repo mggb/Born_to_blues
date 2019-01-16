@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./styles/NavigationBar.css";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 
+
 const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
 
 /**
