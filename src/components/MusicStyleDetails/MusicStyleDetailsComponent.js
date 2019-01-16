@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { NavigationBar } from "../NavigationBar/index";
 import "./styles/MusicStyleDetailsComponent.css";
-import { Context } from "../../App";
 
 import ArtistsComponent from "./ArtistsComponent";
 import AnnecdoteComponent from "./AnecdoteComponent";
@@ -35,54 +34,52 @@ export default class MusicStyleDetailsComponent extends Component<
     const { params } = this.props;
 
     return (
-      <Context.Consumer>
-        {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
-          <div>
-            <li>
-              <Link to={`/${params.musicStyle}`}>
-                Back to {params.musicStyle}
-              </Link>
-            </li>
-            <NavigationBar />
-            {params.musicStyleDetail === "artists" && (
-              <ArtistsComponent
-                musicStyle={params.musicStyle}
-                musicStyleDetail={params.musicStyleDetail}
-              />
-            )}
-            {params.musicStyleDetail === "anecdotes" && (
-              <AnnecdoteComponent
-                musicStyle={params.musicStyle}
-                musicStyleDetail={params.musicStyleDetail}
-              />
-            )}
-            {params.musicStyleDetail === "links" && (
-              <LinksComponent
-                musicStyle={params.musicStyle}
-                musicStyleDetail={params.musicStyleDetail}
-              />
-            )}
-            {params.musicStyle === "blues" && params.musicStyleDetail === "impact" ?
-              <ImpactComponent
-                musicStyle={params.musicStyle}
-                musicStyleDetail={params.musicStyleDetail}
-              />
-              : null}
-            {params.musicStyle === "blues" && params.musicStyleDetail === "origine" ?
-              <OriginComponent
-                musicStyle={params.musicStyle}
-                musicStyleDetail={params.musicStyleDetail}
-              />
-              : null}
-            {params.musicStyle === "blues" && params.musicStyleDetail === "themes" ?
-              <ThemeComponent
-                musicStyle={params.musicStyle}
-                musicStyleDetail={params.musicStyleDetail}
-              />
-              : null}
-          </div>
+
+      <div>
+        <li>
+          <Link to={`/${params.musicStyle}`}>
+            Back to {params.musicStyle}
+          </Link>
+        </li>
+        <NavigationBar />
+        {params.musicStyleDetail === "artists" && (
+          <ArtistsComponent
+            musicStyle={params.musicStyle}
+            musicStyleDetail={params.musicStyleDetail}
+          />
         )}
-      </Context.Consumer>
+        {params.musicStyleDetail === "anecdotes" && (
+          <AnnecdoteComponent
+            musicStyle={params.musicStyle}
+            musicStyleDetail={params.musicStyleDetail}
+          />
+        )}
+        {params.musicStyleDetail === "links" && (
+          <LinksComponent
+            musicStyle={params.musicStyle}
+            musicStyleDetail={params.musicStyleDetail}
+          />
+        )}
+        {params.musicStyle === "blues" && params.musicStyleDetail === "impact" ?
+          <ImpactComponent
+            musicStyle={params.musicStyle}
+            musicStyleDetail={params.musicStyleDetail}
+          />
+          : null}
+        {params.musicStyle === "blues" && params.musicStyleDetail === "origine" ?
+          <OriginComponent
+            musicStyle={params.musicStyle}
+            musicStyleDetail={params.musicStyleDetail}
+          />
+          : null}
+        {params.musicStyle === "blues" && params.musicStyleDetail === "themes" ?
+          <ThemeComponent
+            musicStyle={params.musicStyle}
+            musicStyleDetail={params.musicStyleDetail}
+          />
+          : null}
+      </div>
+
     );
   }
 }
