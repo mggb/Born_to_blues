@@ -25,10 +25,10 @@ const SubArtistsComponent = (props: Props) => (
                     musicStyle={props.musicStyle}
                     musicDetail={props.musicStyleDetail}
                 />
-                {/* <NavigationDetails
+                <NavigationDetails
                     arrayElement={MUSIC_DETAILS}
                     musicStyle={props.musicStyle}
-                /> */}
+                />
             </div>
         )}
     </Context.Consumer>
