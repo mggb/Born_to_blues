@@ -21,9 +21,31 @@ Route.get("/", () => {
 });
 
 Route.group(() => {
-  Route.post("music-style", "MusicStyleController.create");
-  Route.get("music-style", "MusicStyleController.index");
+  /** Routing Music Style */
+
   Route.get("music-style/:id", "MusicStyleController.fetchOne");
-  Route.put("music-style/:id", "MusicStyleController.update");
-  Route.delete("music-style/:id", "MusicStyleController.delete");
+  Route.get("music-style", "MusicStyleController.index");
+  // Route.post("music-style", "MusicStyleController.create");
+  // Route.put("music-style/:id", "MusicStyleController.update");
+  // Route.delete("music-style/:id", "MusicStyleController.delete");
+
+  /** Routing Artist */
+
+  Route.get("artist/:id", "ArtistController.fetchOne");
+  Route.get("artist", "ArtistController.index");
+
+  /** Routing Song */
+
+  Route.get("source/:id", "SongController.fetchOne");
+  Route.get("source", "SongController.index");
+
+  /** Routing Influence */
+
+  Route.get("influence/:id", "InfluenceController.fetchOne");
+  Route.get("influence", "InfluenceController.index");
+
+  /** Routing Description */
+
+  Route.get("description/:id", "DescriptionController.fetchOne");
+  Route.get("description", "DescriptionController.index");
 }).prefix("api");

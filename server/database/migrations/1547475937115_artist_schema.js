@@ -3,22 +3,20 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use("Schema");
 
-class MusicStyleSchema extends Schema {
+class ArtistSchema extends Schema {
   up() {
-    this.create("music_styles", table => {
+    this.create("artists", table => {
       table.increments().unsigned();
       table.string("name");
       table.string("img");
-      table.text("anecdote");
-      table.text("origin");
-      table.text("theme");
+      table.text("song");
       table
-        .integer("related_description_id", 11)
+        .integer("related_description_id")
         .unsigned()
         .references("id")
         .inTable("descriptions");
       table
-        .integer("related_influence_id", 11)
+        .integer("related_influence_id")
         .unsigned()
         .references("id")
         .inTable("influences");
@@ -26,8 +24,8 @@ class MusicStyleSchema extends Schema {
   }
 
   down() {
-    this.drop("music_styles");
+    this.drop("artists");
   }
 }
 
-module.exports = MusicStyleSchema;
+module.exports = ArtistSchema;

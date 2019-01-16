@@ -6,7 +6,7 @@ const Messages = use("App/Helpers/Message");
 const Logger = use("Logger");
 
 class MusicStyleController {
-  // Ajouter un style
+  // Add style
   async create({ request, response }) {
     const body = request.only(["name", "email", "title", "tel"]);
 
@@ -28,7 +28,7 @@ class MusicStyleController {
       .json({ message: Messages.post.errorBadRequest });
   }
 
-  // Lister les lstyles
+  // List music styles
   async index({ request, response }) {
     const musicStyles = await Database.table("music_styles").orderBy(
       "id",
