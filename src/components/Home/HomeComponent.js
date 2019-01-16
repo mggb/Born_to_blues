@@ -62,16 +62,6 @@ export default class HomeComponent extends Component<Props> {
   }
 
   /**
-   * hide the video container when video's over
-   * @param state
-   */
-  handleStateChange(state) {
-    if (state.ended){
-      this.skipVideo()
-    }
-  }
-
-  /**
    *  Function to create the music links
    * @param {Array} musicStylesLogo - The array of music styles logos
    * @returns {Array<any>}
@@ -117,6 +107,16 @@ export default class HomeComponent extends Component<Props> {
     this.setState({
       displayVideo: false
     })
+  }
+
+  /**
+   * hide the video container when video's over
+   * @param state
+   */
+  handleStateChange(state) {
+    if (state.ended){
+      this.skipVideo()
+    }
   }
 
   render() {
