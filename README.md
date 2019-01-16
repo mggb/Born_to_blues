@@ -31,13 +31,34 @@ And then :
 
 It will install all the dependencies.
 
-### `npm run start`
+### `npm run start` (client)
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+### `cd server && adonis serve --dev  ` (server)
+
+Runs the server in the development mode.<br>
+Open [http://localhost:3333/api](http://localhost:3333/api) to view it in the browser.
+
+List of availible routes :
+
+- /api/music-style
+- /api/song
+- /api/influence
+- /api/description
+- /api/artist
+- /api/anecdote
+- 
+- /api/music-style/:id
+- /api/song/:id
+- /api/influence/:id
+- /api/description/:id
+- /api/artist/:id
+- /api/anecdote/:id
 
 ### `npm run flow`
 
