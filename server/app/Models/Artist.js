@@ -4,9 +4,9 @@
 const Model = use("Model");
 
 class Artist extends Model {
-  song() {
-    return this.hasMany("App/Models/Song");
-  }
+  // song() {
+  //   return this.hasMany("App/Models/Song");
+  // }
 }
 
 module.exports = Artist;

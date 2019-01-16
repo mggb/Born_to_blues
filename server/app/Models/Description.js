@@ -4,9 +4,9 @@
 const Model = use("Model");
 
 class Description extends Model {
-  musicStyle() {
-    return this.belongsTo("App/Models/MusicStyle");
-  }
+  // musicStyle() {
+  //   return this.belongsTo("App/Models/MusicStyle");
+  // }
 }
 
 module.exports = Description;

@@ -4,13 +4,12 @@
 const Model = use("Model");
 
 class Influence extends Model {
-  song() {
-    return this.hasMany("App/Models/Song");
-  }
-
-  musicStyle() {
-    return this.belongsTo("App/Models/MusicStyle");
-  }
+  // song() {
+  //   return this.hasMany("App/Models/Song");
+  // }
+  // musicStyle() {
+  //   return this.belongsTo("App/Models/MusicStyle");
+  // }
 }
 
 module.exports = Influence;
