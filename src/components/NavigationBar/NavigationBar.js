@@ -30,11 +30,11 @@ export const NavigationDetails = ({
   arrayElement: Array<string>,
   musicStyle: string
 }): Array<any> =>
-  arrayElement.map(detail => (  
+  arrayElement.map(detail => (
     <li key={detail} className="wizzardElement">
-        <Link to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}>
+      <Link to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}>
         {pointFreeUpperCase(detail)}
-        <div className="wizzard"/>
+        <div className="wizzard" />
       </Link>
     </li>
   ));
@@ -52,11 +52,23 @@ export const NavigationSubDetails = ({
   musicDetail: string
 }): Array<any> =>
   arrayElement.map(detail => (
-    <div className="">
+    <ul>
       <li key={detail}>
         <Link to={`/${musicStyle}/${musicDetail}/${detail}`}>
           {pointFreeUpperCase(detail)}
         </Link>
       </li>
-    </div>
+      <li>
+        <div className="linksSubDetailIntro" >
+          <p>Petit résumé du contenu après le menu</p>
+        </div>
+      </li>
+      <li>
+        <div className="linksViewMore">
+          <div className="linksredLine" />
+          <p>View More</p>
+        </div>
+      </li>
+    </ul>
+
   ));

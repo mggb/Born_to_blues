@@ -5,6 +5,7 @@ import {
     NavigationSubDetails
 } from "../NavigationBar/index";
 import { Context } from "../../App";
+import './styles/LinksComponent.css';
 
 // const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
 
@@ -18,16 +19,13 @@ const LinksComponent = (props: Props) => (
     <Context.Consumer>
         {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
             <div className="currentStyle">
-                <div className="styleContainer">
-                    <div className="vinyleStyleContainer">
-                        <div className="vinyleStyleContent">
-                            <div className="">
-                                <h2 className="">{pointFreeUpperCase(props.musicStyleDetail)}</h2>
-                            </div>
-                        </div>
+                <div className="linksContainer">
+                    <div className="linksTitleContainer">
+                        <h2 className="linksTitle">{pointFreeUpperCase(props.musicStyleDetail)}</h2>
+                        <div className="linksTitleWhiteLine" />
                     </div>
-                    <div className="contentContainer">
-                        <div className="">
+                    <div className="linksSubDetailsContainer">
+                        <div className="linksSubDetailsList">
                             <NavigationSubDetails
                                 musicStyle={props.musicStyle}
                                 musicDetail={props.musicStyleDetail}
