@@ -46,13 +46,9 @@ type Props = {
 export default class HomeComponent extends Component<Props> {
   constructor(props) {
     super(props);
-    this.styleOver = this.styleOver.bind(this);
-    this.styleNotOver = this.styleNotOver.bind(this);
-    this.skipVideo = this.skipVideo.bind(this);
-  }
-
-  state = {
-    displayVideo: true
+    this.state = {
+      displayVideo: true
+    }
   }
 
   componentWillMount(): void {
@@ -62,7 +58,7 @@ export default class HomeComponent extends Component<Props> {
   componentDidMount() {
     // subscribe state change
     // eslint-disable-next-line
-    this.refs.player.subscribeToStateChange(this.handleStateChange.bind(this));
+    this.player.subscribeToStateChange(this.handleStateChange.bind(this));
   }
 
   /**
@@ -97,7 +93,7 @@ export default class HomeComponent extends Component<Props> {
    * function called 'onMouseEnter' on music style Link
    * change h1 content
    */
-  styleOver(title){
+  styleOver = title => {
     this.setState({
       homeTitle: pointFreeUpperCase(title)
     })
@@ -107,7 +103,7 @@ export default class HomeComponent extends Component<Props> {
    * function called 'onMouseEnter' on music style Link
    * change h1 content
    */
-  styleNotOver(){
+  styleNotOver = () => {
     this.setState({
       homeTitle: "Select your style"
     })
@@ -117,7 +113,7 @@ export default class HomeComponent extends Component<Props> {
    * function called 'onClick' on skip video text
    * doesn't display the video section
    */
-  skipVideo(){
+  skipVideo = () => {
     this.setState({
       displayVideo: false
     })
@@ -143,7 +139,7 @@ export default class HomeComponent extends Component<Props> {
                 playsInline
                 src={homeVideo}
                 // eslint-disable-next-line
-                ref="player"
+                ref={elm => this.player = elm}
               />
               <button type="button" className="skip" onClick={this.skipVideo}>Skip Video</button>
             </div>
