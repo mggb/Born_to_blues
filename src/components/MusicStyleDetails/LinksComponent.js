@@ -1,57 +1,61 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import {
-    NavigationBar,
     NavigationDetails,
     NavigationSubDetails
-  } from "../NavigationBar/index";
-  import { Context } from "../../App";
+} from "../NavigationBar/index";
+import { Context } from "../../App";
 
 // const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
 
+type Props = {
+    params: {
+        musicStyle: string,
+        musicStyleDetail: string
+    },
+    translateFunction: {
+        translate: string => string
+    }
+};
 
-export default class LinksComponent extends React.Component<Props>{
-    render(){
-        const params= this.props;       
-        return(
-            <Context.Consumer>
-                {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
-                    <div className="currentStyle">
-                        <div className="styleContainer">
-                            <div className="vinyleStyleContainer">
-                                <div className="vinyleStyleContent">
-                                    <div className="">
-                                        <h2 className="">{pointFreeUpperCase(params.musicStyleDetail)}</h2>
-                                    </div>
-                                </div>
+
+const LinksComponent = (props: Props) => (
+    <Context.Consumer>
+        {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
+            <div className="currentStyle">
+                <div className="styleContainer">
+                    <div className="vinyleStyleContainer">
+                        <div className="vinyleStyleContent">
+                            <div className="">
+                                <h2 className="">{pointFreeUpperCase(props.musicStyleDetail)}</h2>
                             </div>
-                            <div className="contentContainer">
-                                <div className="">
-                                    <NavigationSubDetails 
-                                        musicStyle = {params.musicStyle}
-                                        musicDetail = {params.musicStyleDetail}
-                                        arrayElement={["Jimi Hendrix", "Chuck Berry", "The Rollings Stones", "Elvis Presley"]}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="wizzardNavContainer">
-                            {params === "blues" ? (
-                            <NavigationDetails
-                                arrayElement={BLUES_DETAILS}
-                                musicStyle={params.musicStyle}
-                            />
-                            ) : (
-                            <NavigationDetails
-                                arrayElement={MUSIC_DETAILS}
-                                musicStyle={params.musicStyle}
-                            />
-                            )}
                         </div>
                     </div>
-                )}
-            </Context.Consumer>
-        );
-    }
-}
+                    <div className="contentContainer">
+                        <div className="">
+                            <NavigationSubDetails
+                                musicStyle={props.musicStyle}
+                                musicDetail={props.musicStyleDetail}
+                                arrayElement={["Jimi Hendrix", "Chuck Berry", "The Rollings Stones", "Elvis Presley"]}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="wizzardNavContainer">
+                    {props === "blues" ? (
+                        <NavigationDetails
+                            arrayElement={BLUES_DETAILS}
+                            musicStyle={props.musicStyle}
+                        />
+                    ) : (
+                            <NavigationDetails
+                                arrayElement={MUSIC_DETAILS}
+                                musicStyle={props.musicStyle}
+                            />
+                        )}
+                </div>
+            </div>
+        )}
+    </Context.Consumer>)
+
+export default LinksComponent
