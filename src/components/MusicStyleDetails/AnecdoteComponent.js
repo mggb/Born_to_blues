@@ -28,20 +28,9 @@ export default class AnecdoteComponent extends Component<Props> {
         this.player.subscribeToStateChange(this.handleStateChange.bind(this));
     }
 
-    handleStateChange(state) {
-        // copy player state to this component's state
-        this.setState({
-            player: state
-        });
-        if (state.ended){
-            this.setState( {
-                buttonVideo: 'play'
-            });
-        }
-    }
-
     videoToggle = () => {
-        if (this.state.player.paused){
+        const {player} = this.state;
+        if (player.paused){
             this.player.play();
             this.setState( {
                 buttonVideo: 'pause'
@@ -54,14 +43,27 @@ export default class AnecdoteComponent extends Component<Props> {
         }
     }
 
+    handleStateChange(state) {
+        // copy player state to this component's state
+        this.setState({
+            player: state
+        });
+        if (state.ended){
+            this.setState( {
+                buttonVideo: 'play'
+            });
+        }
+    }
+
     render() {
         const {buttonVideo} = this.state;
+        const {musicStyleDetail, musicStyle} = this.props;
         return (
           <Context.Consumer>
               {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
                 <div id="wrap">
                     <div className="flex">
-                        <h1><span>{pointFreeUpperCase(this.props.musicStyleDetail)}</span></h1>
+                        <h1><span>{pointFreeUpperCase(musicStyleDetail)}</span></h1>
                         <section id="anecdote">
                             <div className="text">
                                 <div>
@@ -85,8 +87,8 @@ export default class AnecdoteComponent extends Component<Props> {
                                 <h3>More anecdotes</h3>
                                 <ul>
                                     <NavigationSubDetails
-                                      musicStyle={this.props.musicStyle}
-                                      musicDetail={this.props.musicStyleDetail}
+                                      musicStyle={musicStyle}
+                                      musicDetail={musicStyleDetail}
                                       arrayElement={["Ducky Walk", "Rolling Stones", "Robert Plant"]}
                                     />
                                 </ul>
@@ -94,17 +96,17 @@ export default class AnecdoteComponent extends Component<Props> {
                         </section>
                     </div>
                     <ul className="navDetails">
-                        {this.props.musicStyle === "blues" ? (
+                        {musicStyle === "blues" ? (
                           <NavigationDetails
                             arrayElement={BLUES_DETAILS}
-                            musicStyle={this.props.musicStyle}
-                            currentDetail={this.props.musicStyleDetail}
+                            musicStyle={musicStyle}
+                            currentDetail={musicStyleDetail}
                           />
                         ) : (
                           <NavigationDetails
                             arrayElement={MUSIC_DETAILS}
-                            musicStyle={this.props.musicStyle}
-                            currentDetail={this.props.musicStyleDetail}
+                            musicStyle={musicStyle}
+                            currentDetail={musicStyleDetail}
                           />
                         )}
                     </ul>

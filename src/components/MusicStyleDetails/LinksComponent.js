@@ -1,11 +1,11 @@
 import React from "react";
+import { Context } from "../../App";
+import {Link} from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import {
     NavigationDetails
 } from "../NavigationBar/index";
-import { Context } from "../../App";
 import './styles/LinksComponent.css';
-import {Link} from "react-router-dom";
 
 const LINKS = [
   {
@@ -35,8 +35,8 @@ const LinksComponent = (props: Props) => {
      * @returns {Array<any>}
      */
     const renderLinks = (links: Array<any>): Array<any> =>
-      links.map((link, index) => (
-          <div key={index}>
+      links.map((link) => (
+          <div key={link.name}>
               <h2>{link.name}</h2>
               <p>{link.exerpt}</p>
               <Link

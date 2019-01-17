@@ -39,10 +39,10 @@ export default class MusicStyleComponent extends Component<Props, State> {
         {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
           <div>
             <section id="header">
-              <Link to={`/`}>
+              <Link to={'/'}>
                 <img src={logo} alt="website logo"/>
               </Link>
-              <Link to={`/`} className="headerLink">
+              <Link to={'/'} className="headerLink">
                 {params}
               </Link>
             </section>
