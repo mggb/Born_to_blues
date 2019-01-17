@@ -25,16 +25,24 @@ export const NavigationBar = () => (
  */
 export const NavigationDetails = ({
   arrayElement,
-  musicStyle
+  musicStyle,
+  currentDetail = ''
 }: {
   arrayElement: Array<string>,
-  musicStyle: string
+  musicStyle: string,
+  currentDetail: string
 }): Array<any> =>
-  arrayElement.map(detail => (  
-    <li key={detail}>
-        <Link to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}/>
-    </li>
-  ));
+  arrayElement.map(detail => {
+    let className = '';
+    if (detail === currentDetail) {
+      className = 'active';
+    }
+    return (
+      <li key={detail}>
+        <Link className={className} to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}/>
+      </li>
+    )
+  });
 
 /**
  *  Navigation Details Component
