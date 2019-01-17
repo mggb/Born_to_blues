@@ -9,7 +9,6 @@ class SongSchema extends Schema {
       table.increments().unsigned();
       table.string("name");
       table.string("author");
-      table.string("song");
       table.string("src");
       table.string("img");
     });

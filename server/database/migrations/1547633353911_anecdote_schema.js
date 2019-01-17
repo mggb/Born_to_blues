@@ -9,6 +9,9 @@ class AnecdoteSchema extends Schema {
       table.increments();
       table.string("name");
       table.text("description");
+
+      // Relationships
+      table.json("songs");
     });
   }
 

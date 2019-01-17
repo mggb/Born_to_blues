@@ -8,6 +8,7 @@ class InfluenceSchema extends Schema {
     this.create("influences", table => {
       table.increments().unsigned();
       table.string("name");
+      table.string("title");
       table.string("img");
       table.text("description");
 

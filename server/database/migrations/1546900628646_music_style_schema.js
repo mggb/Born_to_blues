@@ -10,13 +10,14 @@ class MusicStyleSchema extends Schema {
       table.string("name");
       table.string("img");
       table.text("origin");
-      table.text("theme");
-      table.text("peach");
+      table.text("pitch");
 
       // Relationships
       table.json("descriptions");
       table.json("influences");
       table.json("anecdotes");
+      table.json("artists");
+      table.json("impacts");
     });
   }
 
