@@ -1,29 +1,29 @@
 "use strict";
 /* eslint-disable */
-const Anecdote = use("App/Models/Anecdote");
+const Impact = use("App/Models/Impact");
 const Database = use("Database");
 const Messages = use("App/Helpers/Message");
 const Logger = use("Logger");
 
-class AnecdoteController {
+class ImpactController {
   // Lister les lstyles
   async index({ request, response }) {
-    const anecdotes = await Database.table("anecdotes").orderBy("id", "desc");
+    const impacts = await Database.table("impacts").orderBy("id", "desc");
 
-    if (Object.keys(anecdotes).length === 0) {
+    if (Object.keys(impacts).length === 0) {
       Logger.error("%s - %s", request.method(), request.url());
       return response.json({ message: Messages.post.okNothing });
     }
 
     Logger.info("%s - %s", request.method(), request.url());
-    return anecdotes;
+    return impact;
   }
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const anecdote = await Anecdote.find(params.id);
+    const impacts = await Impact.find(params.id);
 
-    if (!anecdote) {
+    if (!impact) {
       Logger.error("%s - %s", request.method(), request.url());
       return response
         .status(404)
@@ -31,8 +31,8 @@ class AnecdoteController {
     }
 
     Logger.info("%s - %s", request.method(), request.url());
-    return anecdote;
+    return impact;
   }
 }
 
-module.exports = AnecdoteController;
+module.exports = ImpactController;
