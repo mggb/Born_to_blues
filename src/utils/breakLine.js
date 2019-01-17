@@ -1,7 +1,7 @@
 import nl2br from 'react-newline-to-break';
 
 /**
- * @param {string} name titre a modifié
+ * @param {string} name titre a modifier
  */
 
 const breakLine = (name) => {
