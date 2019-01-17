@@ -1,16 +1,17 @@
 // @flow
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./styles/MusicStyleDetailsComponent.css";
-import logo from '../../assets/img/logo.png';
 
 import ArtistsComponent from "./ArtistsComponent";
 import AnnecdoteComponent from "./AnecdoteComponent";
-import LinksComponent from './LinksComponent';
-import ImpactComponent from './ImpactComponent';
-import OriginComponent from './OrigineComponent';
-import ThemeComponent from './ThemeComponent';
+import LinksComponent from "./LinksComponent";
+import ImpactComponent from "./ImpactComponent";
+import OriginComponent from "./OrigineComponent";
+import ThemeComponent from "./ThemeComponent";
+
+// import Header Component
+import HeaderComponent from "../../utils/headerComponent";
 
 type Props = {
   params: {
@@ -27,23 +28,15 @@ type State = {};
 export default class MusicStyleDetailsComponent extends Component<
   Props,
   State
-  > {
+> {
   state = {};
 
   render() {
     const { params } = this.props;
 
     return (
-
       <div>
-        <section id="header">
-          <Link to='/'>
-            <img src={logo} alt="website logo"/>
-          </Link>
-          <Link to={`/${params.musicStyle}`} className="headerLink">
-            {params.musicStyle}
-          </Link>
-        </section>
+        <HeaderComponent params={params} />
         {params.musicStyleDetail === "artists" && (
           <ArtistsComponent
             musicStyle={params.musicStyle}
@@ -62,26 +55,28 @@ export default class MusicStyleDetailsComponent extends Component<
             musicStyleDetail={params.musicStyleDetail}
           />
         )}
-        {params.musicStyle === "blues" && params.musicStyleDetail === "impact" ?
+        {params.musicStyle === "blues" &&
+        params.musicStyleDetail === "impact" ? (
           <ImpactComponent
             musicStyle={params.musicStyle}
             musicStyleDetail={params.musicStyleDetail}
           />
-          : null}
-        {params.musicStyle === "blues" && params.musicStyleDetail === "origine" ?
+        ) : null}
+        {params.musicStyle === "blues" &&
+        params.musicStyleDetail === "origine" ? (
           <OriginComponent
             musicStyle={params.musicStyle}
             musicStyleDetail={params.musicStyleDetail}
           />
-          : null}
-        {params.musicStyle === "blues" && params.musicStyleDetail === "themes" ?
+        ) : null}
+        {params.musicStyle === "blues" &&
+        params.musicStyleDetail === "themes" ? (
           <ThemeComponent
             musicStyle={params.musicStyle}
             musicStyleDetail={params.musicStyleDetail}
           />
-          : null}
+        ) : null}
       </div>
-
     );
   }
 }
