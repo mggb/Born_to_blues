@@ -2,8 +2,8 @@
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { NavigationBar } from "../NavigationBar/index";
 import "./styles/MusicStyleDetailsComponent.css";
+import logo from '../../assets/img/logo.png';
 
 import ArtistsComponent from "./ArtistsComponent";
 import AnnecdoteComponent from "./AnecdoteComponent";
@@ -36,12 +36,12 @@ export default class MusicStyleDetailsComponent extends Component<
     return (
 
       <div>
-        <li>
+        <section id="header">
+          <img src={logo} alt="website logo"/>
           <Link to={`/${params.musicStyle}`}>
-            Back to {params.musicStyle}
+            {params.musicStyle}
           </Link>
-        </li>
-        <NavigationBar />
+        </section>
         {params.musicStyleDetail === "artists" && (
           <ArtistsComponent
             musicStyle={params.musicStyle}
