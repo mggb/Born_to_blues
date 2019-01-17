@@ -27,6 +27,8 @@ And then :
 
 ### **Run it without docker**
 
+## Client
+
 ### `npm install`
 
 It will install all the dependencies.
@@ -39,7 +41,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `cd server && npm install && adonis serve --dev  ` (server)
+## Server
+
+Go to the server folder => `cd server` and install the dependencies `npm install`
+
+### Add adonis configuration
 
 Add a .env file to the root of `server` following this template :
 
@@ -56,6 +62,13 @@ DB_USER=
 DB_PASSWORD=
 DB_DATABASE=adonis
 `
+
+### Run migrations
+`adonis migration:run `
+
+### Launch the server
+
+`adonis serve --dev  `
 
 Runs the server in the development mode.<br>
 Open [http://localhost:3333/api](http://localhost:3333/api) to view it in the browser.
