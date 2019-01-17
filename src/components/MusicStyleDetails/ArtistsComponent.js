@@ -58,9 +58,9 @@ const ArtistsComponent = (props: Props) => {
     return (
       <Context.Consumer>
           {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
-            <div id="anecdoteWrap">
+            <div id="wrap">
                 <div className="flex">
-                    <h1>{pointFreeUpperCase(props.musicStyleDetail)}</h1>
+                    <h1><span>{pointFreeUpperCase(props.musicStyleDetail)}</span></h1>
                     <section id="artist">
                         <div>{renderArtistsLinks(MUSICIANS)}</div>
                     </section>
@@ -70,11 +70,13 @@ const ArtistsComponent = (props: Props) => {
                       <NavigationDetails
                         arrayElement={BLUES_DETAILS}
                         musicStyle={props.musicStyle}
+                        currentDetail={props.musicStyleDetail}
                       />
                     ) : (
                       <NavigationDetails
                         arrayElement={MUSIC_DETAILS}
                         musicStyle={props.musicStyle}
+                        currentDetail={props.musicStyleDetail}
                       />
                     )}
                 </ul>

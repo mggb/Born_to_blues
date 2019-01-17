@@ -88,14 +88,16 @@ export default class MusicStyleSubDetailsComponent extends Component<
     return (
       <section>
         <section id="header">
-          <img src={logo} alt="website logo"/>
-          <Link to={`/${params.musicStyle}`}>
+          <Link to={`/`}>
+            <img src={logo} alt="website logo"/>
+          </Link>
+          <Link to={`/${params.musicStyle}`} className="headerLink">
             {params.musicStyle}
           </Link>
         </section>
         <div id="wrap">
           <div className="flex">
-            <h1>{pointFreeUpperCase(params.musicStyleSubDetail)}</h1>
+            <h1><span>{pointFreeUpperCase(params.musicStyleSubDetail)}</span></h1>
 
 
             <section id="artistDetails">
