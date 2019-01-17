@@ -6,6 +6,7 @@ import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import { NavigationBar, NavigationDetails } from "../NavigationBar/index";
 import "./styles/MusicStyleComponent.css";
 import { Context } from "../../App";
+import vinyle from "../../assets/img/vinyle-rock.png"
 
 type Props = {
   params: string,
@@ -39,18 +40,38 @@ export default class MusicStyleComponent extends Component<Props, State> {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <h2> Music Style: {pointFreeUpperCase(params)}</h2>
-            {params === "blues" ? (
-              <NavigationDetails
-                arrayElement={BLUES_DETAILS}
-                musicStyle={params}
-              />
-            ) : (
-              <NavigationDetails
-                arrayElement={MUSIC_DETAILS}
-                musicStyle={params}
-              />
-            )}
+            <div className="currentStyle">
+                <div className="styleContainer">
+                    <div className="vinyleStyleContainer">
+                        <div className="vinyleStyleContent">
+                            <div className="styleTitleContainer">
+                                <h2 className="styleTitle">{pointFreeUpperCase(params)}</h2>
+                            </div>
+                            <div className="peachImageContainer">
+                                <img className="vinyle" src={vinyle} alt="vinyle"/> 
+                            </div>
+                        </div>
+                    </div>
+                    <div className="contentContainer">
+                        <p>What started off as an underground movement nearly 70 years ago has evolved to be the soundtrack of the lives of an entire generation and all its historic moments. Rock music’s long, storied past has made it a versatile style of music beloved by many.
+                        The style and musicality of rock music was heavily influenced by blues traditions and rhythm and blues (also known as R&B) from the early 20th century let us introduce how blues influenced Rock’n Roll
+                        </p>
+                    </div>
+                </div>
+                <div className="wizzardNavContainer">
+                {params === "blues" ? (
+                  <NavigationDetails
+                    arrayElement={BLUES_DETAILS}
+                    musicStyle={params}
+                  />
+                ) : (
+                  <NavigationDetails
+                    arrayElement={MUSIC_DETAILS}
+                    musicStyle={params}
+                  />
+                )}
+                </div>
+            </div>
             <NavigationBar />
           </div>
         )}
