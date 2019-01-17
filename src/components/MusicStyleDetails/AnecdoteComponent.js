@@ -79,6 +79,7 @@ export default class AnecdoteComponent extends Component<Props> {
                                     <Player
                                       playsInline
                                       src={annecdoteVideo}
+                                      // eslint-disable-next-line
                                       ref={elm => this.player = elm}
                                     />
                                 </div>

@@ -9,7 +9,6 @@ import { Context } from "../../App";
 import vinyle from "../../assets/img/vinyle-rock.png"
 import logo from "../../assets/img/logo.png";
 
-import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 
 
 type Props = {
@@ -42,10 +41,10 @@ export default class MusicStyleComponent extends Component<Props, State> {
         {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
           <div>
             <section id="header">
-              <Link to={'/'}>
+              <Link to='/'>
                 <img src={logo} alt="website logo"/>
               </Link>
-              <Link to={'/'} className="headerLink">
+              <Link to='/' className="headerLink">
                 {params}
               </Link>
             </section>

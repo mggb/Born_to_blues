@@ -37,7 +37,7 @@ export default class MusicStyleDetailsComponent extends Component<
 
       <div>
         <section id="header">
-          <Link to={'/'}>
+          <Link to='/'>
             <img src={logo} alt="website logo"/>
           </Link>
           <Link to={`/${params.musicStyle}`} className="headerLink">

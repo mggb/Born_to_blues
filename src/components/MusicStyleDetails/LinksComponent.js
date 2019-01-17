@@ -1,6 +1,6 @@
 import React from "react";
-import { Context } from "../../App";
 import {Link} from "react-router-dom";
+import { Context } from "../../App";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import {
     NavigationDetails
