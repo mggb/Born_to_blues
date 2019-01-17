@@ -39,26 +39,38 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `cd server && adonis serve --dev  ` (server)
+### `cd server && npm install && adonis serve --dev  ` (server)
+
+Add a .env file to the root of `server` following this template :
+
+`
+HOST=localhost
+PORT=3333
+APP_KEY=
+NODE_ENV=development
+CACHE_VIEWS=false
+SESSION_DRIVER=cookie
+DB_CONNECTION=sqlite
+DB_HOST=127.0.0.1
+DB_USER=
+DB_PASSWORD=
+DB_DATABASE=adonis
+`
 
 Runs the server in the development mode.<br>
 Open [http://localhost:3333/api](http://localhost:3333/api) to view it in the browser.
 
 List of availible routes :
 
-- /api/music-style
-- /api/song
-- /api/influence
-- /api/description
-- /api/artist
-- /api/anecdote
-- 
-- /api/music-style/:id
-- /api/song/:id
-- /api/influence/:id
-- /api/description/:id
-- /api/artist/:id
-- /api/anecdote/:id
+| index |  fetchOne |
+|---|---|
+| /api/music-style  | /api/music-style/:id  |
+| /api/song  | /api/song/:id  |
+| /api/influence  | /api/influence/:id  |
+| /api/description  | /api/description/:id  |
+|  /api/artist | /api/artist/:id  |
+|  /api/anecdote | /api/anecdote/:id  |
+
 
 ### `npm run flow`
 
