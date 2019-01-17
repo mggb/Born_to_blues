@@ -44,17 +44,16 @@ const ArtistsComponent = (props: Props) => {
      * @returns {Array<any>}
      */
     const renderArtistsLinks = (musicians: Array<any>): Array<any> =>
-      musicians.map((musician) => {
-          return (
-            <div key={musician.name}>
-                <Link
-                  to={`/${props.musicStyle}/${props.musicStyleDetail}/${musician.name}`}
-                >
-                    <img src={musician.logo} alt={`${musician.name} musician logo`}/>
-                </Link>
-            </div>
-          )
-      });
+      musicians.map((musician) => (
+          <div key={musician.name}>
+              <Link
+                to={`/${props.musicStyle}/${props.musicStyleDetail}/${musician.name}`}
+              >
+                  <img src={musician.logo} alt={`${musician.name} musician logo`}/>
+              </Link>
+          </div>
+        )
+      );
 
     return (
       <Context.Consumer>

@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from "react";
-import logo from "../../assets/img/logo.png";
 import {Link} from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import './styles/MusicStyleSubDetailsComponent.css'
+import logo from "../../assets/img/logo.png";
 
 // import musician logo
 import hendrix from '../../assets/img/vinyle-jimmi-hendrix.png';
@@ -99,7 +99,6 @@ export default class MusicStyleSubDetailsComponent extends Component<
 
 
             <section id="artistDetails">
-              <div className="title"> </div>
               <div className="content">
                 <Link className="back" to={`/${params.musicStyle}/${params.musicStyleDetail}`}>
                   <i className="fas fa-long-arrow-alt-left"/>
@@ -117,7 +116,7 @@ export default class MusicStyleSubDetailsComponent extends Component<
                       <i className="fas fa-play"/>
                     </a>
                     <div>
-                      <p>Drift'n Blues</p>
+                      <p>Drift&apos;n Blues</p>
                       <p>Eric Clapton</p>
                     </div>
                   </div>
@@ -126,7 +125,7 @@ export default class MusicStyleSubDetailsComponent extends Component<
                       <i className="fas fa-play"/>
                     </a>
                     <div>
-                      <p>Drift'n Blues</p>
+                      <p>Drift&apos;n Blues</p>
                       <p>Eric Clapton</p>
                     </div>
                   </div>
