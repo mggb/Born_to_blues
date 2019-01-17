@@ -9,6 +9,9 @@ import { Context } from "../../App";
 import vinyle from "../../assets/img/vinyle-rock.png"
 import logo from "../../assets/img/logo.png";
 
+import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
+
+
 type Props = {
   params: string,
   translateFunction: {
