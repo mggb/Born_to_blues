@@ -48,4 +48,16 @@ Route.group(() => {
 
   Route.get("description/:id", "DescriptionController.fetchOne");
   Route.get("description", "DescriptionController.index");
+
+  /** Routing Song */
+  Route.get("song/:id", "SongController.fetchOne");
+  Route.get("song", "SongController.index");
+
+  /** Routing Anecdote */
+  Route.get("anecdote/:id", "AnecdoteController.fetchOne");
+  Route.get("anecdote", "AnecdoteController.index");
+
+  /** Routing Impact */
+  Route.get("impact/:id", "ImpactController.fetchOne");
+  Route.get("impact", "ImpactController.index");
 }).prefix("api");
