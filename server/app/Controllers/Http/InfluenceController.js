@@ -21,7 +21,10 @@ class InfluenceController {
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const influence = await Influence.find(params.id);
+    const influence = await Database.table("influences").where(
+      "music-style",
+      params.id
+    );
 
     if (!influence) {
       Logger.error("%s - %s", request.method(), request.url());
