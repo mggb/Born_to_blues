@@ -46,7 +46,7 @@ class MusicStyleController {
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const musicStyle = await MusicStyle.find(params.id);
+    const musicStyle = await MusicStyle.find({ name: params.id });
 
     if (!musicStyle) {
       Logger.error("%s - %s", request.method(), request.url());

@@ -21,7 +21,10 @@ class ImpactController {
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const impacts = await Impact.find(params.id);
+    const impacts = await Database.table("impacts").where(
+      "music-style",
+      params.id
+    );
 
     if (!impact) {
       Logger.error("%s - %s", request.method(), request.url());

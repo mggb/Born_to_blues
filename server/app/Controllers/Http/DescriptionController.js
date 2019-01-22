@@ -24,7 +24,10 @@ class DescriptionController {
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const description = await Description.find(params.id);
+    const description = await Database.table("descriptions").where(
+      "music-style",
+      params.id
+    );
 
     if (!description) {
       Logger.error("%s - %s", request.method(), request.url());
