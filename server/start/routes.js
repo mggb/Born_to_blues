@@ -31,8 +31,8 @@ Route.group(() => {
 
   /** Routing Artist */
 
-  Route.get("artist/:id", "ArtistController.fetchOne");
-  Route.get("artist", "ArtistController.index");
+  Route.get("artists/:id", "ArtistController.fetchOne");
+  Route.get("artists", "ArtistController.index");
 
   /** Routing Song */
 
@@ -44,6 +44,9 @@ Route.group(() => {
   Route.get("influence/:id", "InfluenceController.fetchOne");
   Route.get("influence", "InfluenceController.index");
 
+  Route.get("links/:id", "InfluenceController.fetchOne");
+  Route.get("links", "InfluenceController.index");
+
   /** Routing Description */
 
   Route.get("description/:id", "DescriptionController.fetchOne");
@@ -54,8 +57,8 @@ Route.group(() => {
   Route.get("song", "SongController.index");
 
   /** Routing Anecdote */
-  Route.get("anecdote/:id", "AnecdoteController.fetchOne");
-  Route.get("anecdote", "AnecdoteController.index");
+  Route.get("anecdotes/:id", "AnecdoteController.fetchOne");
+  Route.get("anecdotes", "AnecdoteController.index");
 
   /** Routing Impact */
   Route.get("impact/:id", "ImpactController.fetchOne");
