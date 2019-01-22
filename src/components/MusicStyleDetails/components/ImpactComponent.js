@@ -5,22 +5,19 @@ import { NavigationSubDetails } from "../../NavigationBar";
 
 type Props = {
   musicStyle: string,
-  musicStyleDetail: string
+  musicStyleDetail: string,
+  musicStyleState: any
 };
 
 const ImpactComponent = (props: Props) => {
-  const { musicStyle, musicStyleDetail } = props;
+  const { musicStyle, musicStyleDetail, musicStyleState } = props;
+  const arrayElement = musicStyleState.map(e => e.name);
   return (
     <section id="impact">
       <NavigationSubDetails
         musicStyle={musicStyle}
         musicDetail={musicStyleDetail}
-        arrayElement={[
-          "Jimi Hendrix",
-          "Chuck Berry",
-          "The Rollings Stones",
-          "Elvis Presley"
-        ]}
+        arrayElement={arrayElement}
       />
     </section>
   );

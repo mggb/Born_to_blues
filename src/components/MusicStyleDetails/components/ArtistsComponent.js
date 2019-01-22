@@ -28,25 +28,29 @@ const MUSICIANS: Array<any> = [
 
 type Props = {
   musicStyle: string,
-  musicStyleDetail: string
+  musicStyleDetail: string,
+  musicStyleState: any
 };
 
-const ArtistsComponent = (props: Props) => (
-  <section id="artist">
-    <div>
-      {MUSICIANS.map(musician => (
-        <div key={musician.name}>
-          <Link
-            to={`/${props.musicStyle}/${props.musicStyleDetail}/${
-              musician.name
-            }`}
-          >
-            <img src={musician.logo} alt={`${musician.name} musician logo`} />
-          </Link>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+const ArtistsComponent = (props: Props) => {
+  console.log(props.musicStyleState);
+  return (
+    <section id="artist">
+      <div>
+        {props.musicStyleState.map(musician => (
+          <div key={musician.name}>
+            <Link
+              to={`/${props.musicStyle}/${props.musicStyleDetail}/${
+                musician.name
+              }`}
+            >
+              <img src={musician.img} alt={`${musician.name} musician logo`} />
+            </Link>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default ArtistsComponent;
