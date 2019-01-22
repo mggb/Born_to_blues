@@ -8,6 +8,7 @@ class ArtistSchema extends Schema {
     this.create("artists", table => {
       table.increments().unsigned();
       table.string("name");
+      table.string("music-style");
       table.string("title");
       table.string("img");
       table.text("description");
