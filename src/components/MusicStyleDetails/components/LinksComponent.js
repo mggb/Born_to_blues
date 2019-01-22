@@ -19,7 +19,8 @@ const LINKS = [
 
 type Props = {
   musicStyle: string,
-  musicStyleDetail: string
+  musicStyleDetail: string,
+  musicStyleState: any
 };
 
 const LinksComponent = (props: Props) => (
@@ -30,10 +31,10 @@ const LinksComponent = (props: Props) => (
    */
 
   <section id="links">
-    {LINKS.map(link => (
+    {props.musicStyleState.map(link => (
       <div key={link.name}>
         <h2>{link.name}</h2>
-        <p>{link.exerpt}</p>
+        <p>{link.title}</p>
         <Link
           to={`/${props.musicStyle}/${props.musicStyleDetail}/${link.name}`}
         >

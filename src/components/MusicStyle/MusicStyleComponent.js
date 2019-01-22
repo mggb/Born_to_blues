@@ -17,14 +17,18 @@ type Props = {
   }
 };
 
-type State = {};
+type State = {
+  musicStyle: any
+};
 
 /**
  *  Music Style Component
  */
 
 export default class MusicStyleComponent extends Component<Props, State> {
-  state = {};
+  state = {
+    musicStyle: { description: "" }
+  };
 
   /**
    *  Function to create the detail list
@@ -32,8 +36,16 @@ export default class MusicStyleComponent extends Component<Props, State> {
    * @param {string} musicStyle - The music style param in the url.
    */
 
+  componentDidMount = () => {
+    const { params } = this.props;
+    fetch(`http://127.0.0.1:3333/api/music-style/${params}`)
+      .then(res => res.json())
+      .then(musicStyle => this.setState({ musicStyle }));
+  };
+
   render() {
     const { params } = this.props;
+    const { musicStyle } = this.state;
 
     return (
       <Context.Consumer>
@@ -46,16 +58,7 @@ export default class MusicStyleComponent extends Component<Props, State> {
                 <div className="vinyle">
                   <img src={vinyle} alt="vinyle" />
                 </div>
-                <p>
-                  What started off as an underground movement nearly 70 years
-                  ago has evolved to be the soundtrack of the lives of an entire
-                  generation and all its historic moments. Rock music’s long,
-                  storied past has made it a versatile style of music beloved by
-                  many. The style and musicality of rock music was heavily
-                  influenced by blues traditions and rhythm and blues (also
-                  known as R&B) from the early 20th century let us introduce how
-                  blues influenced Rock’n Roll
-                </p>
+                <p>{musicStyle.pitch}</p>
               </div>
               <ul className="navDetails">
                 {params === "blues" ? (

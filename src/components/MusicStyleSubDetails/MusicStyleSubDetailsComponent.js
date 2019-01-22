@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import "./styles/MusicStyleSubDetailsComponent.css";
+import { propEq, find } from "ramda";
 
 // import musician logo
 import hendrix from "../../assets/img/vinyle-jimmi-hendrix.png";
@@ -39,7 +40,9 @@ type Props = {
   }
 };
 
-type State = {};
+type State = {
+  musicStyleState: any
+};
 
 const SUB_DETAILS = ["instruments", "electric-guitar"];
 
@@ -47,7 +50,9 @@ export default class MusicStyleSubDetailsComponent extends Component<
   Props,
   State
 > {
-  state = {};
+  state = {
+    musicStyleState: null
+  };
 
   filterNavSubDetails = (element: any) => {
     SUB_DETAILS.filter(item => item !== element);
@@ -82,8 +87,30 @@ export default class MusicStyleSubDetailsComponent extends Component<
       </li>
     ));
 
+  componentWillMount = () => {
+    const {
+      params: { musicStyle, musicStyleDetail, musicStyleSubDetail }
+    } = this.props;
+    console.log(this.props);
+    fetch(
+      `http://127.0.0.1:3333/api/${
+        musicStyleDetail === "links" ? "influence" : musicStyleDetail
+      }/${musicStyle}`
+    )
+      .then(res => res.json())
+      .then(musicStyleState => {
+        this.setState({
+          musicStyleState: find(propEq("name", musicStyleSubDetail))(
+            musicStyleState
+          )
+        });
+      });
+  };
+
   render() {
     const { params } = this.props;
+    const { musicStyleState } = this.state;
+
     return (
       <section>
         <HeaderComponent params={params} />
@@ -101,19 +128,9 @@ export default class MusicStyleSubDetailsComponent extends Component<
                 >
                   <i className="fas fa-long-arrow-alt-left" />
                 </Link>
-                <h2>phrase sur le groupe</h2>
+                <h2>{musicStyleState && musicStyleState.title}</h2>
                 <p className="text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                  cum deleniti dicta ipsum laudantium placeat repudiandae
-                  temporibus unde? Amet architecto culpa ipsum iste molestias
-                  odio optio sequi suscipit vitae voluptate. Lorem ipsum dolor
-                  sit amet, consectetur adipisicing elit. Amet cum deleniti
-                  dicta ipsum laudantium placeat repudiandae temporibus unde?
-                  Amet architecto culpa ipsum iste molestias odio optio sequi
-                  suscipit vitae voluptate. Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit. Amet cum deleniti dicta ipsum
-                  laudantium culpa ipsum iste molestias odio optio sequi
-                  suscipit vitae voluptate.
+                  {musicStyleState && musicStyleState.description}
                 </p>
                 <div>
                   <div className="playMusic">
