@@ -25,24 +25,53 @@ type Props = {
   }
 };
 
-type State = {};
+type State = {
+  musicStyleState: any
+};
 
 export default class MusicStyleDetailsComponent extends Component<
   Props,
   State
 > {
-  state = {};
+  state = {
+    musicStyleState: null
+  };
+
+  fetchData = (musicStyle, musicStyleDetail) => {
+    fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
+      .then(res => res.json())
+      .then(musicStyleState => {
+        this.setState({ musicStyleState });
+      });
+  };
+
+  componentWillMount = () => {
+    const {
+      params: { musicStyle, musicStyleDetail }
+    } = this.props;
+    this.fetchData(musicStyle, musicStyleDetail);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    this.fetchData(
+      nextProps.params.musicStyle,
+      nextProps.params.musicStyleDetail
+    );
+  };
 
   renderContent = () => {
     const {
       params: { musicStyle, musicStyleDetail }
     } = this.props;
+    const { musicStyleState } = this.state;
+    console.log("update", musicStyleState);
     switch (musicStyleDetail) {
       case "artists":
         return (
           <ArtistsComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
           />
         );
       case "anecdotes":
@@ -50,6 +79,7 @@ export default class MusicStyleDetailsComponent extends Component<
           <AnecdoteComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
           />
         );
       case "influences":
@@ -65,6 +95,7 @@ export default class MusicStyleDetailsComponent extends Component<
           <LinksComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
           />
         );
       default:
@@ -77,7 +108,7 @@ export default class MusicStyleDetailsComponent extends Component<
       params
     } = this.props;
 
-    const styleColor = '#a80000';
+    const styleColor = "#a80000";
 
     const css = `
       #header a.headerLink:before{
@@ -105,6 +136,7 @@ export default class MusicStyleDetailsComponent extends Component<
           background: ${styleColor};
       }
     `;
+    const { musicStyleState } = this.state;
 
     return (
       <div>
@@ -117,7 +149,7 @@ export default class MusicStyleDetailsComponent extends Component<
                 <h1>
                   <span>{pointFreeUpperCase(musicStyleDetail)}</span>
                 </h1>
-                {this.renderContent()}
+                {musicStyleState && this.renderContent()}
               </div>
               <ul className="navDetails">
                 {musicStyle === "blues" ? (

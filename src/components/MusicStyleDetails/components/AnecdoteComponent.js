@@ -7,7 +7,8 @@ import annecdoteVideo from "../../../assets/video/video_introduction.mp4";
 
 type Props = {
   musicStyle: string,
-  musicStyleDetail: string
+  musicStyleDetail: string,
+  musicStyleState: any
 };
 
 export default class AnecdoteComponent extends Component<Props> {
@@ -52,16 +53,14 @@ export default class AnecdoteComponent extends Component<Props> {
 
   render() {
     const { buttonVideo } = this.state;
-    const { musicStyleDetail, musicStyle } = this.props;
+    const { musicStyleDetail, musicStyle, musicStyleState } = this.props;
+    const arrayElement = musicStyleState.map(e => e.name);
     return (
       <section id="anecdote">
         <div className="text">
           <div>
             <h2>Ducky walk</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
-              aliquid dicta, doloribus fugit magni nesciunt!
-            </p>
+            <p>{musicStyleState.description}</p>
             <button type="button" onClick={this.videoToggle}>
               <i className={`fas fa-${buttonVideo}`} />
             </button>
@@ -83,7 +82,7 @@ export default class AnecdoteComponent extends Component<Props> {
             <NavigationSubDetails
               musicStyle={musicStyle}
               musicDetail={musicStyleDetail}
-              arrayElement={["Ducky Walk", "Rolling Stones", "Robert Plant"]}
+              arrayElement={arrayElement}
             />
           </ul>
         </div>

@@ -29,7 +29,8 @@ const MUSICIANS: Array<any> = [
 
 type Props = {
   musicStyle: string,
-  musicStyleDetail: string
+  musicStyleDetail: string,
+  musicStyleState: any
 };
 
 const ArtistsComponent = (props: Props) => (
@@ -42,7 +43,10 @@ const ArtistsComponent = (props: Props) => (
               musician.name
             }`}
           >
-            <Vinyle img={musician.logo} alt={`${musician.name} musician logo`}/>
+            <Vinyle
+              img={musician.logo}
+              alt={`${musician.name} musician logo`}
+            />
           </Link>
         </div>
       ))}
