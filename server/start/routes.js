@@ -61,6 +61,9 @@ Route.group(() => {
   Route.get("anecdotes", "AnecdoteController.index");
 
   /** Routing Impact */
-  Route.get("impact/:id", "ImpactController.fetchOne");
   Route.get("impact", "ImpactController.index");
+  Route.get("impact/:id", "ImpactController.fetchOne");
+
+  Route.get("origine", "ImpactController.index");
+  Route.get("origine/:id", "ImpactController.fetchOne");
 }).prefix("api");
