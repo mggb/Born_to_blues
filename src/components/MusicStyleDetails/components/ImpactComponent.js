@@ -11,7 +11,7 @@ type Props = {
 
 const ImpactComponent = (props: Props) => {
   const { musicStyle, musicStyleDetail, musicStyleState } = props;
-  const arrayElement = musicStyleState.map(e => e.name);
+  const arrayElement = musicStyleState.map(e => e.description.name);
   return (
     <section id="impact">
       <NavigationSubDetails
