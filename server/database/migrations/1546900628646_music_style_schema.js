@@ -16,6 +16,7 @@ class MusicStyleSchema extends Schema {
       table.json("descriptions");
       table.json("influences");
       table.json("anecdotes");
+      table.json("themes");
       table.json("artists");
       table.json("impacts");
     });
