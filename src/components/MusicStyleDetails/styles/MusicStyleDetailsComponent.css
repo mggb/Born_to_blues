@@ -338,7 +338,38 @@
     }
     #wrap h1 {
        font-size: 35px;
+       margin: 20px;
     }
+    /*ArtistComponent*/
+    #artist > div{
+        
+    }
+    #artist > div {
+        overflow: inherit;
+        display: block;
+    }
+    #artist img {
+        width: 100%;
+    }
+    #artist a {
+        width: 120px;
+        height: 120px;
+        margin: 0;
+    }
+
+    #artist > div> div:nth-child(1):before{
+        width: 0;
+    }
+    #artist > div> div:nth-child(2):before{
+        
+        width: 0;
+    } 
+    #artist > div> div:nth-child(2){
+        margin-left: 110px;
+    }
+    #artist > div> div:nth-child(4){
+        margin-left: 110px;
+    }                                  
 }
 
 
