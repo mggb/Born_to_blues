@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Player } from "video-react";
-import { NavigationSubDetails } from "../../NavigationBar";
+import { Link } from "react-router-dom";
+import { find, propEq } from "ramda";
 import annecdoteVideo from "../../../assets/video/video_introduction.mp4";
 
 // const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
@@ -15,7 +16,8 @@ export default class AnecdoteComponent extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      buttonVideo: "play"
+      buttonVideo: "play",
+      anecdote: "Elvis Presley"
     };
   }
 
@@ -23,6 +25,25 @@ export default class AnecdoteComponent extends Component<Props> {
     // subscribe state change
     this.player.subscribeToStateChange(this.handleStateChange.bind(this));
   }
+
+  AnecdoteNavigation = ({
+    arrayElement
+  }: {
+    arrayElement: Array<string>
+  }): Array<any> =>
+    arrayElement.map(detail => (
+      <li key={detail}>
+        <Link
+          to=""
+          onClick={e => {
+            e.preventDefault();
+            this.setState({ anecdote: detail });
+          }}
+        >
+          {detail}
+        </Link>
+      </li>
+    ));
 
   videoToggle = () => {
     const { player } = this.state;
@@ -52,15 +73,18 @@ export default class AnecdoteComponent extends Component<Props> {
   }
 
   render() {
-    const { buttonVideo } = this.state;
-    const { musicStyleDetail, musicStyle, musicStyleState } = this.props;
+    const { buttonVideo, anecdote } = this.state;
+    const { musicStyleState } = this.props;
     const arrayElement = musicStyleState.map(e => e.name);
+
+    const anecdoteState = find(propEq("name", anecdote))(musicStyleState);
+
     return (
       <section id="anecdote">
         <div className="text">
           <div>
-            <h2>Ducky walk</h2>
-            <p>{musicStyleState.description}</p>
+            <h2>{anecdoteState.name}</h2>
+            <p>{anecdoteState.description}</p>
             <button type="button" onClick={this.videoToggle}>
               <i className={`fas fa-${buttonVideo}`} />
             </button>
@@ -70,7 +94,7 @@ export default class AnecdoteComponent extends Component<Props> {
           <div>
             <Player
               playsInline
-              src={annecdoteVideo}
+              src={anecdoteState.songs}
               // eslint-disable-next-line
               ref={elm => (this.player = elm)}
             />
@@ -79,11 +103,7 @@ export default class AnecdoteComponent extends Component<Props> {
         <div className="nav">
           <h3>More anecdotes</h3>
           <ul>
-            <NavigationSubDetails
-              musicStyle={musicStyle}
-              musicDetail={musicStyleDetail}
-              arrayElement={arrayElement}
-            />
+            <this.AnecdoteNavigation arrayElement={arrayElement} />
           </ul>
         </div>
       </section>
