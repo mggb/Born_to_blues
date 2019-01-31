@@ -40,11 +40,13 @@ export default class MusicStyleDetailsComponent extends Component<
   };
 
   fetchData = (musicStyle, musicStyleDetail) => {
-    fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
-      .then(res => res.json())
-      .then(musicStyleState => {
-        this.setState({ musicStyleState });
-      });
+    if (musicStyleDetail !== "impact" || musicStyleDetail !== "origine") {
+      fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
+        .then(res => res.json())
+        .then(musicStyleState => {
+          this.setState({ musicStyleState });
+        });
+    }
   };
 
   componentWillMount = () => {
@@ -66,7 +68,7 @@ export default class MusicStyleDetailsComponent extends Component<
       params: { musicStyle, musicStyleDetail }
     } = this.props;
     const { musicStyleState } = this.state;
-    console.log("update", musicStyleState);
+
     switch (musicStyleDetail) {
       case "artists":
         return (
