@@ -318,3 +318,27 @@
     top: 10px;
     position: absolute;
 }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 767px) {
+    #links {
+        display: block;
+        padding-top: 10%;
+    }
+    #links > div{
+        width: 100%;
+    }
+    #links h2{
+        font-size: 30px;
+    }
+    #wrap h1 span:before {
+        width: 3px;
+        height: 35px;
+      bottom: -50px;
+        left: 25px;
+    }
+    #wrap h1 {
+       font-size: 35px;
+    }
+}
+
+
