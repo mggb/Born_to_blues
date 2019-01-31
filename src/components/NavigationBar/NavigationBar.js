@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./styles/NavigationBar.css";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 
-
 const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
 
 /**
@@ -26,22 +25,25 @@ export const NavigationBar = () => (
 export const NavigationDetails = ({
   arrayElement,
   musicStyle,
-  currentDetail = ''
+  currentDetail = ""
 }: {
   arrayElement: Array<string>,
   musicStyle: string,
   currentDetail: string
 }): Array<any> =>
   arrayElement.map(detail => {
-    let className = '';
+    let className = "";
     if (detail === currentDetail) {
-      className = 'active';
+      className = "active";
     }
     return (
       <li key={detail}>
-        <Link className={className} to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}/>
+        <Link
+          className={className}
+          to={detail !== "blues" ? `/${musicStyle}/${detail}` : `/${detail}`}
+        />
       </li>
-    )
+    );
   });
 
 /**
@@ -58,8 +60,6 @@ export const NavigationSubDetails = ({
 }): Array<any> =>
   arrayElement.map(detail => (
     <li key={detail}>
-      <Link to={`/${musicStyle}/${musicDetail}/${detail}`}>
-        {pointFreeUpperCase(detail)}
-      </Link>
+      <Link to={`/${musicStyle}/${musicDetail}/${detail}`}>{detail}</Link>
     </li>
   ));
