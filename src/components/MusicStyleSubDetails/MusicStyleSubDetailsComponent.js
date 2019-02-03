@@ -84,8 +84,27 @@ export default class MusicStyleSubDetailsComponent extends Component<
 
   render() {
     const { params } = this.props;
+
+    const styleColor = '#a80000';
+
+    const css = `
+      .playMusic i {
+          color: ${styleColor};
+      }
+      .playMusic a {
+          border: 1px solid ${styleColor};
+      }
+      .playMusic div:before {
+          background: ${styleColor};
+      }
+      .navSubDetails a.active:before{
+          background: ${styleColor};
+      }
+    `;
+
     return (
       <section>
+        <style>{css}</style>
         <HeaderComponent params={params} />
         <div id="wrap">
           <div className="flex">
