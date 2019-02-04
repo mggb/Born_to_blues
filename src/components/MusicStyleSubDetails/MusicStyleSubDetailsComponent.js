@@ -28,8 +28,14 @@ const SUB_DETAILS = ["instruments", "electric-guitar"];
 class MusicStyleSubDetailsComponent extends Component<Props, State> {
   state = {
     musicStyleState: null,
-    navBarState: []
+    navBarState: [],
+    playingFirtsAudio: false,
+    playingSecondAudio: false
   };
+
+  songElementOne = new Audio();
+
+  songElementSecond = new Audio();
 
   filterNavSubDetails = (element: any) => {
     SUB_DETAILS.filter(item => item !== element);
@@ -100,11 +106,17 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
           fetch(`http://127.0.0.1:3333/api/song/${musicStyle}`)
             .then(res => res.json())
             .then(songs => {
-              this.setState({ songs });
+              this.setState({
+                songs,
+                songElementOne: new Audio(songs[0].src),
+                songElementSecond: new Audio(songs[1].src)
+              });
             });
         }
       });
   };
+
+  toggleAudio = () => {};
 
   render() {
     const { params } = this.props;
@@ -154,7 +166,18 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                   <div>
                     <div className="playMusic">
                       <a href="/">
-                        <i className="fas fa-play" />
+                        <i
+                          onClick={() => {
+                            const { playingFirtsAudio } = this.state;
+                            this.setState({
+                              playingFirtsAudio: !playingFirtsAudio
+                            });
+                            if (playingFirtsAudio) 
+                              this.songElementOne.play()
+                            else this.songElementOne.pause();
+                          }}
+                          className="fas fa-play"
+                        />
                       </a>
                       <div>
                         <p>{songs[0].name}</p>
@@ -163,7 +186,18 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                     </div>
                     <div className="playMusic">
                       <a href="/">
-                        <i className="fas fa-play" />
+                        <i
+                          onClick={() => {
+                            const { playingFirtsAudio } = this.state;
+                            this.setState({
+                              playingSecondAudio: !this.state.playingSecondAudio
+                            });
+                            if (playingFirtsAudio)
+                              this.songElementSecond.play()
+                            else this.songElementSecond.pause();
+                          }}
+                          className="fas fa-play"
+                        />
                       </a>
                       <div>
                         <p>{songs[1].name}</p>
