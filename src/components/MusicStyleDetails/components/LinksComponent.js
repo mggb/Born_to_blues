@@ -8,26 +8,29 @@ type Props = {
   musicStyleState: any
 };
 
-const LinksComponent = (props: Props) => (
-  /**
-   *  Function to create the links links
-   * @param {Array} links - The array of links
-   * @returns {Array<any>}
-   */
+const LinksComponent = (props: Props) => {
+  const { musicStyleState } = props;
+  return (
+    /**
+     *  Function to create the links links
+     * @param {Array} links - The array of links
+     * @returns {Array<any>}
+     */
 
-  <section id="links">
-    {props.musicStyleState.map(link => (
-      <div key={link.name}>
-        <h2>{link.name}</h2>
-        <p>{link.title}</p>
-        <Link
-          to={`/${props.musicStyle}/${props.musicStyleDetail}/${link.name}`}
-        >
-          View more
-        </Link>
-      </div>
-    ))}
-  </section>
-);
+    <section id="links">
+      {musicStyleState.map(link => (
+        <div key={link.name}>
+          <h2>{link.name}</h2>
+          <p>{link.title}</p>
+          <Link
+            to={`/${props.musicStyle}/${props.musicStyleDetail}/${link.name}`}
+          >
+            View more
+          </Link>
+        </div>
+      ))}
+    </section>
+  );
+};
 
 export default LinksComponent;
