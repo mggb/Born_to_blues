@@ -8,7 +8,6 @@ import AnecdoteComponent from "./components/AnecdoteComponent";
 import LinksComponent from "./components/LinksComponent";
 import ImpactComponent from "./components/ImpactComponent";
 import OriginComponent from "./components/OrigineComponent";
-import ThemeComponent from "./components/ThemeComponent";
 
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import { NavigationDetails } from "../NavigationBar/index";
@@ -107,14 +106,6 @@ export default class MusicStyleDetailsComponent extends Component<
           case "origine":
             return (
               <OriginComponent
-                musicStyle={musicStyle}
-                musicStyleDetail={musicStyleDetail}
-                musicStyleState={musicStyleState}
-              />
-            );
-          case "theme":
-            return (
-              <ThemeComponent
                 musicStyle={musicStyle}
                 musicStyleDetail={musicStyleDetail}
                 musicStyleState={musicStyleState}
