@@ -97,8 +97,38 @@ export default class MusicStyleDetailsComponent extends Component<
       params
     } = this.props;
 
+    const styleColor = '#a80000';
+
+    const css = `
+      #header a.headerLink:before{
+          background: ${styleColor};
+      }
+      #header a.headerLink:after{
+          background: ${styleColor};
+      }
+      #anecdote .text button {
+          background: ${styleColor};
+      }
+      #anecdote .nav a{
+          color: ${styleColor};
+      }
+      #anecdote .nav li:before{
+          background: ${styleColor};
+      }
+      .navDetails a.active:before{
+          background: ${styleColor};
+      }
+      #links a{
+          color: ${styleColor};
+      }
+      #links a:before{
+          background: ${styleColor};
+      }
+    `;
+
     return (
       <div>
+        <style>{css}</style>
         <HeaderComponent params={params} />
         <Context.Consumer>
           {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
