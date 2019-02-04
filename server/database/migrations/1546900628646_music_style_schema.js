@@ -11,6 +11,7 @@ class MusicStyleSchema extends Schema {
       table.string("img");
       table.text("origin");
       table.text("pitch");
+      table.string("color");
 
       // Relationships
       table.json("descriptions");
