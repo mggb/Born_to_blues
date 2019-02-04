@@ -27,7 +27,7 @@ type State = {
 
 export default class MusicStyleComponent extends Component<Props, State> {
   state = {
-    musicStyle: { description: "" }
+    musicStyle: { description: "", pitch: "" }
   };
 
   /**
