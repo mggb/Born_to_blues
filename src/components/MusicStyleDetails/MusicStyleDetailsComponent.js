@@ -38,7 +38,7 @@ export default class MusicStyleDetailsComponent extends Component<
     musicStyleState: null
   };
 
-  fetchData = (musicStyle, musicStyleDetail) => {
+  fetchData = (musicStyle: string, musicStyleDetail: any) => {
     if (musicStyleDetail !== "impact" || musicStyleDetail !== "origine") {
       fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
         .then(res => res.json())
@@ -55,7 +55,7 @@ export default class MusicStyleDetailsComponent extends Component<
     this.fetchData(musicStyle, musicStyleDetail);
   };
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps: any) => {
     this.fetchData(
       nextProps.params.musicStyle,
       nextProps.params.musicStyleDetail
