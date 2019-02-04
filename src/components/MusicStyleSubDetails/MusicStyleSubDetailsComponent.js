@@ -6,6 +6,9 @@ import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import Vinyle from "../../utils/vinyle";
 import "./styles/MusicStyleSubDetailsComponent.css";
 
+// Import fetch color util
+import fetchColor from "../../utils/fetch";
+
 // import header Component
 import HeaderComponent from "../../utils/headerComponent";
 import AudioComponent from "./components/AudioComponent";
@@ -102,6 +105,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
       params: { musicStyle, musicStyleDetail, musicStyleSubDetail }
     } = this.props;
     this.fetchData(musicStyle, musicStyleDetail, musicStyleSubDetail);
+    fetchColor(musicStyle, this);
   };
 
   fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
@@ -138,8 +142,9 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
 
   render() {
     const { params } = this.props;
+    const { color } = this.state;
 
-    const styleColor = "#a80000";
+    const styleColor = color;
 
     const css = `
       #header a.headerLink:before{
