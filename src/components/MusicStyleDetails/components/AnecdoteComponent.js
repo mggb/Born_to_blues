@@ -83,8 +83,8 @@ export default class AnecdoteComponent extends Component<Props> {
       <section id="anecdote">
         <div className="text">
           <div>
-            <h2>{anecdoteState.name}</h2>
-            <p>{anecdoteState.description}</p>
+            <h2>{anecdoteState && anecdoteState.name}</h2>
+            <p>{anecdoteState && anecdoteState.description}</p>
             <button type="button" onClick={this.videoToggle}>
               <i className={`fas fa-${buttonVideo}`} />
             </button>
@@ -94,7 +94,7 @@ export default class AnecdoteComponent extends Component<Props> {
           <div>
             <Player
               playsInline
-              src={anecdoteState.songs}
+              src={anecdoteState && anecdoteState.songs}
               // eslint-disable-next-line
               ref={elm => (this.player = elm)}
             />

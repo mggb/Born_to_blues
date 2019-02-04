@@ -30,8 +30,14 @@ const SUB_DETAILS = ["instruments", "electric-guitar"];
 class MusicStyleSubDetailsComponent extends Component<Props, State> {
   state = {
     musicStyleState: null,
-    navBarState: []
+    navBarState: [],
+    playingFirtsAudio: false,
+    playingSecondAudio: false
   };
+
+  songElementOne = new Audio();
+
+  songElementSecond = new Audio();
 
   filterNavSubDetails = (element: any) => {
     SUB_DETAILS.filter(item => item !== element);
@@ -118,11 +124,17 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
           fetch(`http://127.0.0.1:3333/api/song/${musicStyle}`)
             .then(res => res.json())
             .then(songs => {
-              this.setState({ songs });
+              this.setState({
+                songs,
+                songElementOne: new Audio(songs[0].src),
+                songElementSecond: new Audio(songs[1].src)
+              });
             });
         }
       });
   };
+
+  toggleAudio = () => {};
 
   render() {
     const { params } = this.props;
