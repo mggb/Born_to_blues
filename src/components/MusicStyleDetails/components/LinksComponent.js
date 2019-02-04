@@ -2,21 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/LinksComponent.css";
 
-const LINKS = [
-  {
-    exerpt: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    name: "Electric Guitar"
-  },
-  {
-    exerpt: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    name: "Rythmes and Blues"
-  },
-  {
-    exerpt: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    name: "Rock'n Teenagers"
-  }
-];
-
 type Props = {
   musicStyle: string,
   musicStyleDetail: string,
