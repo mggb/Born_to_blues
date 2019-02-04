@@ -5,6 +5,9 @@ import { propEq, find, has } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import "./styles/MusicStyleSubDetailsComponent.css";
 
+// Import fetch color util
+import fetchColor from "../../utils/fetch";
+
 // import header Component
 import HeaderComponent from "../../utils/headerComponent";
 
@@ -84,6 +87,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
       params: { musicStyle, musicStyleDetail, musicStyleSubDetail }
     } = this.props;
     this.fetchData(musicStyle, musicStyleDetail, musicStyleSubDetail);
+    fetchColor(musicStyle, this);
   };
 
   fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
@@ -120,8 +124,9 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
 
   render() {
     const { params } = this.props;
+    const { color } = this.state;
 
-    const styleColor = "#a80000";
+    const styleColor = color;
 
     const css = `
       .playMusic i {
@@ -172,8 +177,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                             this.setState({
                               playingFirtsAudio: !playingFirtsAudio
                             });
-                            if (playingFirtsAudio) 
-                              this.songElementOne.play()
+                            if (playingFirtsAudio) this.songElementOne.play();
                             else this.songElementOne.pause();
                           }}
                           className="fas fa-play"
@@ -193,7 +197,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                               playingSecondAudio: !this.state.playingSecondAudio
                             });
                             if (playingFirtsAudio)
-                              this.songElementSecond.play()
+                              this.songElementSecond.play();
                             else this.songElementSecond.pause();
                           }}
                           className="fas fa-play"

@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import "./styles/MusicStyleDetailsComponent.css";
+import fetchColor from "../../utils/fetch";
 
 import ArtistsComponent from "./components/ArtistsComponent";
 import AnecdoteComponent from "./components/AnecdoteComponent";
@@ -53,6 +54,7 @@ export default class MusicStyleDetailsComponent extends Component<
       params: { musicStyle, musicStyleDetail }
     } = this.props;
     this.fetchData(musicStyle, musicStyleDetail);
+    fetchColor(musicStyle, this);
   };
 
   componentWillReceiveProps = (nextProps: any) => {
@@ -123,8 +125,9 @@ export default class MusicStyleDetailsComponent extends Component<
       params: { musicStyle, musicStyleDetail },
       params
     } = this.props;
-
-    const styleColor = "#a80000";
+    const { musicStyleState, color } = this.state;
+    // console.log(musicStyleState, musicStyle);
+    const styleColor = color;
 
     const css = `
       #header a.headerLink:before{
@@ -152,7 +155,6 @@ export default class MusicStyleDetailsComponent extends Component<
           background: ${styleColor};
       }
     `;
-    const { musicStyleState } = this.state;
 
     return (
       <div>
