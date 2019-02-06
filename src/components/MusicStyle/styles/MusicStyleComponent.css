@@ -63,6 +63,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 125%;
+    animation-duration: 0.4s;
+    animation-name: fadein;
     /*z-index: -1;*/
 }
 #musicWrap p{
@@ -70,6 +72,8 @@
     color: #fff;
     z-index: 10;
     margin-left: 150px;
+    animation-duration: 3s;
+    animation-name: fadein;
 }
 @media only screen and (min-device-width : 320px) and (max-device-width : 767px) {
     #musicWrap > .flex{
@@ -103,6 +107,11 @@
     padding: 0 10%;
     }
 }
+
+@keyframes fadein {
+    0% { opacity: 0;}
+    100% { opacity:1 ;}
+  }
 
 
     
