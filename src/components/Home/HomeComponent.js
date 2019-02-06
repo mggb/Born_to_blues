@@ -5,6 +5,7 @@ import { Player } from 'video-react';
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import logo from "./assets/img/logo.png"
 import "./styles/HomeComponent.css";
+import "video-react/dist/video-react.css";
 import homeVideo from './assets/video/video_introduction.mp4';
 
 // import music_styles_logo
