@@ -86,7 +86,7 @@ export default class MusicStyleDetailsComponent extends Component<
             musicStyleState={musicStyleState}
           />
         );
-      case "influences":
+      case "influence":
         return (
           <InfluenceComponent
             musicStyle={musicStyle}

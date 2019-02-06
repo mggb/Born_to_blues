@@ -44,21 +44,28 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
    */
   renderArtistsLinks = (
     musicians: Array<any>,
+    authorName,
     musicStyle,
     musicDetail
   ): Array<any> =>
-    musicians.map(musician => (
-      <div key={musician.name}>
-        <Link
-          onClick={() => {
-            this.fetchData(musicStyle, musicDetail, musician.name);
-          }}
-          to={`/${musicStyle}/${musicDetail}/${musician.name}`}
-        >
-          <Vinyle img={musician.logo} alt={`${musician.name} musician logo`} />
-        </Link>
-      </div>
-    ));
+    musicians.map(
+      musician =>
+        authorName !== musician.name && (
+          <div key={musician.name}>
+            <Link
+              onClick={() => {
+                this.fetchData(musicStyle, musicDetail, musician.name);
+              }}
+              to={`/${musicStyle}/${musicDetail}/${musician.name}`}
+            >
+              <Vinyle
+                img={musician.img}
+                alt={`${musician.name} musician logo`}
+              />
+            </Link>
+          </div>
+        )
+    );
 
   renderNavigationSubDetails = (arrayElement): Array<any> => {
     const { indexDescription } = this.state;
@@ -102,15 +109,15 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
 
   playerAudio = anecdoteState =>
     anecdoteState.map(element => (
-      <div className="playMusic">
-        <a>
-          <i className="fas fa-play" />
-        </a>
-        <div>
-          <p>{element.name}</p>
-          <p>{element.author}</p>
-        </div>
-      </div>
+      <AudioComponent
+        videoId={
+          element.src.match(
+            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i
+          )[1]
+        }
+        music={element.name}
+        artist={element.author}
+      />
     ));
 
   fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
@@ -178,7 +185,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
     } = this.state;
     const authorName = musicStyleState && musicStyleState.name;
     const anecdoteState = songs && filter(propEq("author", authorName))(songs);
-
+    console.log(musicStyleState);
     return (
       <section>
         <style>{css}</style>
@@ -202,18 +209,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                   {musicStyleState &&
                     breakWords(musicStyleState.description)[indexDescription]}
                 </p>
-                <div>
-                  <AudioComponent
-                    videoId="tgbNymZ7vqY"
-                    music="Drift'n Blues"
-                    artist="Eric Clapton"
-                  />
-                  <AudioComponent
-                    videoId="tgbNymZ7vqY"
-                    music="Drift'n Blues"
-                    artist="Eric Clapton"
-                  />
-                </div>
+                <div>{songs && this.playerAudio(anecdoteState)}</div>
                 <ul className="navSubDetails">
                   {musicStyleState &&
                     this.renderNavigationSubDetails(
@@ -224,6 +220,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
               <div className="nav">
                 {this.renderArtistsLinks(
                   navBarState,
+                  authorName,
                   params.musicStyle,
                   params.musicStyleDetail
                 )}

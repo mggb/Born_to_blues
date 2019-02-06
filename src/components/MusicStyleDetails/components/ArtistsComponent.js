@@ -10,6 +10,7 @@ type Props = {
 
 const ArtistsComponent = (props: Props) => {
   const { musicStyleState } = props;
+  console.log(musicStyleState);
   return (
     <section id="artist">
       <div>
@@ -21,7 +22,7 @@ const ArtistsComponent = (props: Props) => {
               }`}
             >
               <Vinyle
-                img={musician.logo}
+                img={musician.img}
                 alt={`${musician.name} musician logo`}
               />
             </Link>
