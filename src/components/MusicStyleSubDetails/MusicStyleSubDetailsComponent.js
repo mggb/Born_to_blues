@@ -1,12 +1,14 @@
-//
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { propEq, find, has } from "ramda";
+import { propEq, filter, has, find } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import "./styles/MusicStyleSubDetailsComponent.css";
 
 // Import fetch color util
 import fetchColor from "../../utils/fetch";
+
+// Import break Words
+import breakWords from "../../utils/breakWords";
 
 // import header Component
 import HeaderComponent from "../../utils/headerComponent";
@@ -26,22 +28,11 @@ type State = {
   musicStyleState: any
 };
 
-const SUB_DETAILS = ["instruments", "electric-guitar"];
-
 class MusicStyleSubDetailsComponent extends Component<Props, State> {
   state = {
     musicStyleState: null,
     navBarState: [],
-    playingFirtsAudio: false,
-    playingSecondAudio: false
-  };
-
-  songElementOne = new Audio();
-
-  songElementSecond = new Audio();
-
-  filterNavSubDetails = (element: any) => {
-    SUB_DETAILS.filter(item => item !== element);
+    indexDescription: 0
   };
 
   /**
@@ -67,20 +58,21 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
       </div>
     ));
 
-  renderNavigationSubDetails = (
-    arrayElement,
-    musicStyle,
-    musicDetail: {
-      arrayElement: Array<string>,
-      musicStyle: string,
-      musicDetail: string
-    }
-  ): Array<any> =>
-    arrayElement.map(detail => (
-      <li key={detail}>
-        <Link to={`/${musicStyle}/${musicDetail}/${detail}`} />
+  renderNavigationSubDetails = (arrayElement): Array<any> => {
+    const { indexDescription } = this.state;
+    return arrayElement.map((element, index) => (
+      <li key={Math.random()}>
+        <Link
+          className={indexDescription === index ? "active" : ""}
+          to=""
+          onClick={e => {
+            e.preventDefault();
+            this.setState({ indexDescription: index });
+          }}
+        />
       </li>
     ));
+  };
 
   componentWillMount = () => {
     const {
@@ -89,6 +81,19 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
     this.fetchData(musicStyle, musicStyleDetail, musicStyleSubDetail);
     fetchColor(musicStyle, this);
   };
+
+  playerAudio = anecdoteState =>
+    anecdoteState.map(element => (
+      <div className="playMusic">
+        <a>
+          <i className="fas fa-play" />
+        </a>
+        <div>
+          <p>{element.name}</p>
+          <p>{element.author}</p>
+        </div>
+      </div>
+    ));
 
   fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
     const hasSong = has("songs");
@@ -111,9 +116,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
             .then(res => res.json())
             .then(songs => {
               this.setState({
-                songs,
-                songElementOne: new Audio(songs[0].src),
-                songElementSecond: new Audio(songs[1].src)
+                songs
               });
             });
         }
@@ -143,7 +146,14 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
       }
     `;
 
-    const { musicStyleState, songs, navBarState } = this.state;
+    const {
+      musicStyleState,
+      songs,
+      navBarState,
+      indexDescription
+    } = this.state;
+    const authorName = musicStyleState && musicStyleState.name;
+    const anecdoteState = songs && filter(propEq("author", authorName))(songs);
 
     return (
       <section>
@@ -165,57 +175,15 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                 </Link>
                 <h2>{musicStyleState && musicStyleState.title}</h2>
                 <p className="text">
-                  {musicStyleState && musicStyleState.description}
+                  {musicStyleState &&
+                    breakWords(musicStyleState.description)[indexDescription]}
                 </p>
-                {songs && (
-                  <div>
-                    <div className="playMusic">
-                      <a href="/">
-                        <i
-                          onClick={() => {
-                            const { playingFirtsAudio } = this.state;
-                            this.setState({
-                              playingFirtsAudio: !playingFirtsAudio
-                            });
-                            if (playingFirtsAudio) this.songElementOne.play();
-                            else this.songElementOne.pause();
-                          }}
-                          className="fas fa-play"
-                        />
-                      </a>
-                      <div>
-                        <p>{songs[0].name}</p>
-                        <p>{songs[0].author}</p>
-                      </div>
-                    </div>
-                    <div className="playMusic">
-                      <a href="/">
-                        <i
-                          onClick={() => {
-                            const { playingFirtsAudio } = this.state;
-                            this.setState({
-                              playingSecondAudio: !this.state.playingSecondAudio
-                            });
-                            if (playingFirtsAudio)
-                              this.songElementSecond.play();
-                            else this.songElementSecond.pause();
-                          }}
-                          className="fas fa-play"
-                        />
-                      </a>
-                      <div>
-                        <p>{songs[1].name}</p>
-                        <p>{songs[1].author}</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {songs && <div>{this.playerAudio(anecdoteState)}</div>}
                 <ul className="navSubDetails">
-                  {this.renderNavigationSubDetails(
-                    SUB_DETAILS,
-                    params.musicStyle,
-                    params.musicStyleDetail
-                  )}
+                  {musicStyleState &&
+                    this.renderNavigationSubDetails(
+                      breakWords(musicStyleState.description)
+                    )}
                 </ul>
               </div>
               <div className="nav">
