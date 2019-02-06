@@ -41,8 +41,11 @@ Route.group(() => {
 
   /** Routing Influence */
 
-  Route.get("influence/:id", "InfluenceController.fetchOne");
-  Route.get("influence", "InfluenceController.index");
+  Route.get("influence/:id", "AnecdoteController.fetchOne");
+  Route.get("influence", "AnecdoteController.index");
+
+  Route.get("origin/:id", "InfluenceController.fetchOne");
+  Route.get("origin", "InfluenceController.index");
 
   Route.get("links/:id", "InfluenceController.fetchOne");
   Route.get("links", "InfluenceController.index");
@@ -63,7 +66,4 @@ Route.group(() => {
   /** Routing Impact */
   Route.get("impact", "ImpactController.index");
   Route.get("impact/:id", "ImpactController.fetchOne");
-
-  Route.get("origine", "ImpactController.index");
-  Route.get("origine/:id", "ImpactController.fetchOne");
 }).prefix("api");
