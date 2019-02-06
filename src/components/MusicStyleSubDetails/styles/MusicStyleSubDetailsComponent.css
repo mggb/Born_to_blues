@@ -1,5 +1,5 @@
 #wrap{
-    background: #040404;
+    background: #111;
     height: 92vh;
 }
 #wrap > .flex{
@@ -28,7 +28,7 @@
     left: 25px;
 }
 #artistDetails{
-    background: #040404;
+    background: #111;
     position: relative;
     height: 80vh;
     overflow: hidden;

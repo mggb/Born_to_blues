@@ -48,7 +48,7 @@ export default class HomeComponent extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      displayVideo: true
+      displayVideo: false
     }
   }
 
@@ -56,11 +56,11 @@ export default class HomeComponent extends Component<Props> {
     this.styleNotOver();
   }
 
-  componentDidMount() {
-    // subscribe state change
-    // eslint-disable-next-line
-    this.player.subscribeToStateChange(this.handleStateChange.bind(this));
-  }
+  // componentDidMount() {
+  //   // subscribe state change
+  //   // eslint-disable-next-line
+  //   this.player.subscribeToStateChange(this.handleStateChange.bind(this));
+  // }
 
   /**
    *  Function to create the music links
