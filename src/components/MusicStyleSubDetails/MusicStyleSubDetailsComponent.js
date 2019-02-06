@@ -123,11 +123,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
   fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
     const hasSong = has("songs");
 
-    fetch(
-      `http://127.0.0.1:3333/api/${
-        musicStyleDetail === "links" ? "influence" : musicStyleDetail
-      }/${musicStyle}`
-    )
+    fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
       .then(res => res.json())
       .then(musicStyleState => {
         this.setState({

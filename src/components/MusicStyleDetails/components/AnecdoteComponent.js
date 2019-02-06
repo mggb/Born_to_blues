@@ -3,8 +3,6 @@ import { Player } from "video-react";
 import { Link } from "react-router-dom";
 import { find, propEq } from "ramda";
 
-// const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
-
 type Props = {
   musicStyle: string,
   musicStyleDetail: string,
@@ -86,19 +84,28 @@ export default class AnecdoteComponent extends Component<Props> {
           <div>
             <h2>{anecdoteState && anecdoteState.name}</h2>
             <p>{anecdoteState && anecdoteState.description}</p>
-            <button type="button" onClick={this.videoToggle}>
-              <i className={`fas fa-${buttonVideo}`} />
-            </button>
+            {anecdoteState &&
+              anecdoteState.songs &&
+              JSON.parse(anecdoteState.songs).content && (
+                <button type="button" onClick={() => this.videoToggle()}>
+                  <i className={`fas fa-${buttonVideo}`} />
+                </button>
+              )}
           </div>
         </div>
         <div className="video">
           <div>
             <Player
               playsInline
+              poster={
+                anecdoteState &&
+                anecdoteState.songs &&
+                JSON.parse(anecdoteState.songs).image
+              }
               src={
                 anecdoteState &&
                 anecdoteState.songs &&
-                anecdoteState.songs.content
+                JSON.parse(anecdoteState.songs).content
               }
               // eslint-disable-next-line
               ref={elm => (this.player = elm)}

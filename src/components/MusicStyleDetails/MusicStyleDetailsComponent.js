@@ -91,6 +91,7 @@ export default class MusicStyleDetailsComponent extends Component<
           <InfluenceComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
           />
         );
       case "links":
