@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Vinyle from "../../../utils/vinyle";
 
 // import musician logo
-import hendrix from "../../../assets/img/vinyle-jimmi-hendrix.png";
+import hendrix from "../../../assets/img/test.jpg";
 import presley from "../../../assets/img/vinyle-elvis-presley.png";
 import stones from "../../../assets/img/vinyle-rolling-stones.png";
 
@@ -41,7 +42,7 @@ const ArtistsComponent = (props: Props) => (
               musician.name
             }`}
           >
-            <img src={musician.logo} alt={`${musician.name} musician logo`} />
+            <Vinyle img={musician.logo} alt={`${musician.name} musician logo`}/>
           </Link>
         </div>
       ))}

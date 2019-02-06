@@ -5,10 +5,8 @@ import "./styles/MusicStyleDetailsComponent.css";
 
 import ArtistsComponent from "./components/ArtistsComponent";
 import AnecdoteComponent from "./components/AnecdoteComponent";
+import InfluenceComponent from "./components/InfluenceComponent";
 import LinksComponent from "./components/LinksComponent";
-import ImpactComponent from "./components/ImpactComponent";
-import OriginComponent from "./components/OrigineComponent";
-import ThemeComponent from "./components/ThemeComponent";
 
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import { NavigationDetails } from "../NavigationBar/index";
@@ -54,39 +52,21 @@ export default class MusicStyleDetailsComponent extends Component<
             musicStyleDetail={musicStyleDetail}
           />
         );
+      case "influences":
+        return (
+          <InfluenceComponent
+            musicStyle={musicStyle}
+            musicStyleDetail={musicStyleDetail}
+          />
+        );
       case "links":
+      case "origin":
         return (
           <LinksComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
           />
         );
-      case "blues":
-        switch (musicStyleDetail) {
-          case "impact":
-            return (
-              <ImpactComponent
-                musicStyle={musicStyle}
-                musicStyleDetail={musicStyleDetail}
-              />
-            );
-          case "origine":
-            return (
-              <OriginComponent
-                musicStyle={musicStyle}
-                musicStyleDetail={musicStyleDetail}
-              />
-            );
-          case "theme":
-            return (
-              <ThemeComponent
-                musicStyle={musicStyle}
-                musicStyleDetail={musicStyleDetail}
-              />
-            );
-          default:
-        }
-        break;
       default:
     }
   };

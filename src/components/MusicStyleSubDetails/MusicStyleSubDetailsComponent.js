@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
+import Vinyle from "../../utils/vinyle";
 import "./styles/MusicStyleSubDetailsComponent.css";
 
 // import musician logo
@@ -11,6 +12,7 @@ import stones from "../../assets/img/vinyle-rolling-stones.png";
 
 // import header Component
 import HeaderComponent from "../../utils/headerComponent";
+import AudioComponent from "./components/AudioComponent";
 
 /** Fake data */
 const MUSICIANS: Array<any> = [
@@ -62,7 +64,7 @@ export default class MusicStyleSubDetailsComponent extends Component<
     musicians.map(musician => (
       <div key={musician.name}>
         <Link to={`/${musician.name}`}>
-          <img src={musician.logo} alt={`${musician.name} musician logo`} />
+          <Vinyle img={musician.logo} alt={`${musician.name} musician logo`} />
         </Link>
       </div>
     ));
@@ -82,16 +84,39 @@ export default class MusicStyleSubDetailsComponent extends Component<
       </li>
     ));
 
+  _onReady = (event, player) => {
+    // access to player in all event handlers via event.target
+    // event.target.pauseVideo();
+    this.setState({
+      [player]: event.target
+    })
+  }
+
+  toggleMusic = (elm) => {
+    let player = this.state[elm];
+    if (player.getPlayerState() !== 1) {
+      player.playVideo()
+    } else {
+      player.pauseVideo()
+    }
+  }
+
   render() {
     const { params } = this.props;
 
     const styleColor = '#a80000';
 
     const css = `
+      #header a.headerLink:before{
+          background: ${styleColor};
+      }
+      #header a.headerLink:after{
+          background: ${styleColor};
+      }
       .playMusic i {
           color: ${styleColor};
       }
-      .playMusic a {
+      .playMusic button {
           border: 1px solid ${styleColor};
       }
       .playMusic div:before {
@@ -135,24 +160,16 @@ export default class MusicStyleSubDetailsComponent extends Component<
                   suscipit vitae voluptate.
                 </p>
                 <div>
-                  <div className="playMusic">
-                    <a href="/">
-                      <i className="fas fa-play" />
-                    </a>
-                    <div>
-                      <p>Drift&apos;n Blues</p>
-                      <p>Eric Clapton</p>
-                    </div>
-                  </div>
-                  <div className="playMusic">
-                    <a href="/">
-                      <i className="fas fa-play" />
-                    </a>
-                    <div>
-                      <p>Drift&apos;n Blues</p>
-                      <p>Eric Clapton</p>
-                    </div>
-                  </div>
+                  <AudioComponent
+                    videoId="tgbNymZ7vqY"
+                    music="Drift&apos;n Blues"
+                    artist="Eric Clapton"
+                  />
+                  <AudioComponent
+                    videoId="tgbNymZ7vqY"
+                    music="Drift&apos;n Blues"
+                    artist="Eric Clapton"
+                  />
                 </div>
                 <ul className="navSubDetails">
                   {this.renderNavigationSubDetails(
