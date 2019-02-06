@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Player } from "video-react";
 import { Link } from "react-router-dom";
 import { find, propEq } from "ramda";
-import annecdoteVideo from "../../../assets/video/video_introduction.mp4";
 
 // const MUSIC_STYLES: Array<string> = ["rap", "jazz", "country", "rock"];
 
@@ -17,7 +16,7 @@ export default class AnecdoteComponent extends Component<Props> {
     super(props);
     this.state = {
       buttonVideo: "play",
-      anecdote: "Elvis Presley"
+      anecdote: null
     };
   }
 
@@ -76,8 +75,10 @@ export default class AnecdoteComponent extends Component<Props> {
     const { buttonVideo, anecdote } = this.state;
     const { musicStyleState } = this.props;
     const arrayElement = musicStyleState.map(e => e.name);
-
-    const anecdoteState = find(propEq("name", anecdote))(musicStyleState);
+    const anecdoteFirstName = anecdote || musicStyleState[0].name;
+    const anecdoteState = find(propEq("name", anecdoteFirstName))(
+      musicStyleState
+    );
 
     return (
       <section id="anecdote">
@@ -94,7 +95,11 @@ export default class AnecdoteComponent extends Component<Props> {
           <div>
             <Player
               playsInline
-              src={anecdoteState && anecdoteState.songs}
+              src={
+                anecdoteState &&
+                anecdoteState.songs &&
+                anecdoteState.songs.content
+              }
               // eslint-disable-next-line
               ref={elm => (this.player = elm)}
             />
