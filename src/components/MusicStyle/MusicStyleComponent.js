@@ -40,7 +40,7 @@ export default class MusicStyleComponent extends Component<Props, State> {
     const { params } = this.props;
     fetch(`http://127.0.0.1:3333/api/music-style/${params}`)
       .then(res => res.json())
-      .then(musicStyle => this.setState({ musicStyle }));
+      .then(musicStyle => this.setState({ musicStyle: musicStyle[0] }));
   };
 
   render() {
@@ -56,7 +56,7 @@ export default class MusicStyleComponent extends Component<Props, State> {
               <div className="flex">
                 <h1>{pointFreeUpperCase(params)}</h1>
                 <div className="vinyle">
-                  <img src={vinyle} alt="vinyle" />
+                  <img src={musicStyle.img} alt="vinyle" />
                 </div>
                 <p>{musicStyle.pitch}</p>
               </div>

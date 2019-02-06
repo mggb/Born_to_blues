@@ -1,13 +1,15 @@
-//
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { propEq, find, has } from "ramda";
+import { propEq, filter, has, find } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import Vinyle from "../../utils/vinyle";
 import "./styles/MusicStyleSubDetailsComponent.css";
 
 // Import fetch color util
 import fetchColor from "../../utils/fetch";
+
+// Import break Words
+import breakWords from "../../utils/breakWords";
 
 // import header Component
 import HeaderComponent from "../../utils/headerComponent";
@@ -28,22 +30,11 @@ type State = {
   musicStyleState: any
 };
 
-const SUB_DETAILS = ["instruments", "electric-guitar"];
-
 class MusicStyleSubDetailsComponent extends Component<Props, State> {
   state = {
     musicStyleState: null,
     navBarState: [],
-    playingFirtsAudio: false,
-    playingSecondAudio: false
-  };
-
-  songElementOne = new Audio();
-
-  songElementSecond = new Audio();
-
-  filterNavSubDetails = (element: any) => {
-    SUB_DETAILS.filter(item => item !== element);
+    indexDescription: 0
   };
 
   /**
@@ -69,20 +60,21 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
       </div>
     ));
 
-  renderNavigationSubDetails = (
-    arrayElement,
-    musicStyle,
-    musicDetail: {
-      arrayElement: Array<string>,
-      musicStyle: string,
-      musicDetail: string
-    }
-  ): Array<any> =>
-    arrayElement.map(detail => (
-      <li key={detail}>
-        <Link to={`/${musicStyle}/${musicDetail}/${detail}`} />
+  renderNavigationSubDetails = (arrayElement): Array<any> => {
+    const { indexDescription } = this.state;
+    return arrayElement.map((element, index) => (
+      <li key={Math.random()}>
+        <Link
+          className={indexDescription === index ? "active" : ""}
+          to=""
+          onClick={e => {
+            e.preventDefault();
+            this.setState({ indexDescription: index });
+          }}
+        />
       </li>
     ));
+  };
 
   _onReady = (event, player) => {
     // access to player in all event handlers via event.target
@@ -108,6 +100,19 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
     fetchColor(musicStyle, this);
   };
 
+  playerAudio = anecdoteState =>
+    anecdoteState.map(element => (
+      <div className="playMusic">
+        <a>
+          <i className="fas fa-play" />
+        </a>
+        <div>
+          <p>{element.name}</p>
+          <p>{element.author}</p>
+        </div>
+      </div>
+    ));
+
   fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
     const hasSong = has("songs");
 
@@ -129,9 +134,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
             .then(res => res.json())
             .then(songs => {
               this.setState({
-                songs,
-                songElementOne: new Audio(songs[0].src),
-                songElementSecond: new Audio(songs[1].src)
+                songs
               });
             });
         }
@@ -167,7 +170,14 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
       }
     `;
 
-    const { musicStyleState, songs, navBarState } = this.state;
+    const {
+      musicStyleState,
+      songs,
+      navBarState,
+      indexDescription
+    } = this.state;
+    const authorName = musicStyleState && musicStyleState.name;
+    const anecdoteState = songs && filter(propEq("author", authorName))(songs);
 
     return (
       <section>
@@ -189,7 +199,8 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                 </Link>
                 <h2>{musicStyleState && musicStyleState.title}</h2>
                 <p className="text">
-                  {musicStyleState && musicStyleState.description}
+                  {musicStyleState &&
+                    breakWords(musicStyleState.description)[indexDescription]}
                 </p>
                 <div>
                   <AudioComponent
@@ -204,11 +215,10 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
                   />
                 </div>
                 <ul className="navSubDetails">
-                  {this.renderNavigationSubDetails(
-                    SUB_DETAILS,
-                    params.musicStyle,
-                    params.musicStyleDetail
-                  )}
+                  {musicStyleState &&
+                    this.renderNavigationSubDetails(
+                      breakWords(musicStyleState.description)
+                    )}
                 </ul>
               </div>
               <div className="nav">
