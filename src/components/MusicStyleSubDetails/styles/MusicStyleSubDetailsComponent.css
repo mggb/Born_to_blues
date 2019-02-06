@@ -127,6 +127,9 @@
     transform: translate(-50%, -50%);
     width: 180%;
 }
+#artistDetails .nav a .logo{
+    width: 90%;
+}
 
 /*navSubDetails*/
 .navSubDetails{

@@ -277,11 +277,16 @@
 #artist a:hover{
     transform: scale(.9);
 }
-#artist img {
+#artist img{
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+.vinyleLogo .logo{
+    width: 60%;
+}
+.vinyleLogo .vinyle{
     width: 125%;
 }
 /*links*/

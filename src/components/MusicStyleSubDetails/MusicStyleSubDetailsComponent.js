@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
+import Vinyle from "../../utils/vinyle";
 import "./styles/MusicStyleSubDetailsComponent.css";
 
 // import musician logo
@@ -63,7 +64,7 @@ export default class MusicStyleSubDetailsComponent extends Component<
     musicians.map(musician => (
       <div key={musician.name}>
         <Link to={`/${musician.name}`}>
-          <img src={musician.logo} alt={`${musician.name} musician logo`} />
+          <Vinyle img={musician.logo} alt={`${musician.name} musician logo`} />
         </Link>
       </div>
     ));
