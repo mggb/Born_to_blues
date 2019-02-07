@@ -35,7 +35,8 @@ export default class MusicStyleDetailsComponent extends Component<
   State
 > {
   state = {
-    musicStyleState: null
+    musicStyleState: null,
+    fetched: false
   };
 
   fetchData = (musicStyle: string, musicStyleDetail: any) => {
@@ -43,12 +44,12 @@ export default class MusicStyleDetailsComponent extends Component<
       fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
         .then(res => res.json())
         .then(musicStyleState => {
-          this.setState({ musicStyleState });
+          this.setState({ musicStyleState, fetched: true });
         });
     }
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const {
       params: { musicStyle, musicStyleDetail }
     } = this.props;
@@ -57,6 +58,7 @@ export default class MusicStyleDetailsComponent extends Component<
   };
 
   componentWillReceiveProps = (nextProps: any) => {
+    this.setState({ fetched: false });
     this.fetchData(
       nextProps.params.musicStyle,
       nextProps.params.musicStyleDetail
@@ -112,11 +114,14 @@ export default class MusicStyleDetailsComponent extends Component<
       params: { musicStyle, musicStyleDetail },
       params
     } = this.props;
-    const { musicStyleState, color } = this.state;
+    const { musicStyleState, color, fetched } = this.state;
     // console.log(musicStyleState, musicStyle);
     const styleColor = color;
 
     const css = `
+      .flex {
+        display: ${fetched ? "flex" : "none"}!important;
+      }
       #header a.headerLink:before{
           background: ${styleColor};
       }
