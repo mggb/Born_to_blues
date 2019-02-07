@@ -7,6 +7,7 @@ import vinyle from "../../assets/img/vinyle-rock.png";
 
 // import header Component
 import HeaderComponent from "../../utils/headerComponent";
+import {Link} from "react-router-dom";
 
 type Props = {
   params: string,
@@ -48,7 +49,7 @@ export default class MusicStyleComponent extends Component<Props, State> {
   render() {
     const { params } = this.props;
     const { musicStyle } = this.state;
-
+console.log(musicStyle && musicStyle.color)
     return (
       <Context.Consumer>
         {({ MUSIC_DETAILS, BLUES_DETAILS }) => (
@@ -75,6 +76,7 @@ export default class MusicStyleComponent extends Component<Props, State> {
                   />
                 )}
               </ul>
+              <Link style={{"border":`3px solid ${musicStyle.color}`}} className="NextButton" to={`/${params}/${params === "blues" ? BLUES_DETAILS[0] : MUSIC_DETAILS[0]}`}>Next</Link>
             </div>
           </div>
         )}
