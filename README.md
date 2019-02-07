@@ -10,7 +10,7 @@ https://github.com/ayshiff/Born_to_blues.git
 
 In the project directory, you can run:
 
-### **Run it with docker**  🐳
+### **Run it with docker**  🐳 (client-side)
 
 ```
 docker build -t born-to-blues .

@@ -8,6 +8,7 @@ class AnecdoteSchema extends Schema {
     this.create("anecdotes", table => {
       table.increments();
       table.string("name");
+      table.string("music-style");
       table.text("description");
 
       // Relationships

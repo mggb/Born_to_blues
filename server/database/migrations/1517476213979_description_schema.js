@@ -9,6 +9,7 @@ class DescriptionSchema extends Schema {
       table.increments().unsigned();
       table.string("name");
       table.string("img");
+      table.string("music-style");
       table.text("content");
     });
   }

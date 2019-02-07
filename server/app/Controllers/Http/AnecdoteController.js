@@ -21,7 +21,10 @@ class AnecdoteController {
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const anecdote = await Anecdote.find(params.id);
+    const anecdote = await Database.table("anecdotes").where(
+      "music-style",
+      params.id
+    );
 
     if (!anecdote) {
       Logger.error("%s - %s", request.method(), request.url());

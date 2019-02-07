@@ -9,19 +9,29 @@ class ImpactController {
   // Lister les lstyles
   async index({ request, response }) {
     const impacts = await Database.table("impacts").orderBy("id", "desc");
-
+    console.log(impacts);
     if (Object.keys(impacts).length === 0) {
       Logger.error("%s - %s", request.method(), request.url());
       return response.json({ message: Messages.post.okNothing });
     }
 
     Logger.info("%s - %s", request.method(), request.url());
-    return impact;
+    return impacts;
   }
+
+  // async fetchOrigine({ request, response }) {
+  //   await Database.table('impacts').where(
+  //     "music-style",
+  //     params.id
+  //   );
+  // }
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const impacts = await Impact.find(params.id);
+    const impact = await Database.table("impacts").where(
+      "music-style",
+      params.id
+    );
 
     if (!impact) {
       Logger.error("%s - %s", request.method(), request.url());
