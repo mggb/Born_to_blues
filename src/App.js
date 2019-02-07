@@ -15,7 +15,7 @@ export const Context = React.createContext();
 
 const contextValue = {
   MUSIC_DETAILS: ["artists", "links", "anecdotes", "blues"],
-  BLUES_DETAILS: ["artists", "anecdotes", "impact", "origine", "themes"]
+  BLUES_DETAILS: ["artists", "influence", "origin"]
 };
 
 /**

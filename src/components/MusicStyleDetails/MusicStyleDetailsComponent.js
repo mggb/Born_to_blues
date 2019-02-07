@@ -1,14 +1,11 @@
-// @flow
-
 import React, { Component } from "react";
 import "./styles/MusicStyleDetailsComponent.css";
+import fetchColor from "../../utils/fetch";
 
 import ArtistsComponent from "./components/ArtistsComponent";
 import AnecdoteComponent from "./components/AnecdoteComponent";
+import InfluenceComponent from "./components/InfluenceComponent";
 import LinksComponent from "./components/LinksComponent";
-import ImpactComponent from "./components/ImpactComponent";
-import OriginComponent from "./components/OrigineComponent";
-import ThemeComponent from "./components/ThemeComponent";
 
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import { NavigationDetails } from "../NavigationBar/index";
@@ -27,24 +24,62 @@ type Props = {
   }
 };
 
-type State = {};
+type State = {
+  musicStyleState: any,
+  color: string,
+  fetched: boolean
+};
 
 export default class MusicStyleDetailsComponent extends Component<
   Props,
   State
 > {
-  state = {};
+  state = {
+    musicStyleState: null,
+    fetched: false
+  };
+
+  fetchData = (musicStyle: string, musicStyleDetail: any) => {
+    if (musicStyleDetail !== "impact" || musicStyleDetail !== "origine") {
+      fetch(
+        `${process.env.REACT_APP_DB_URL}/api/${musicStyleDetail}/${musicStyle}`
+      )
+        .then(res => res.json())
+        .then(musicStyleState => {
+          this.setState({ musicStyleState, fetched: true });
+        });
+    }
+  };
+
+  componentDidMount = () => {
+    const {
+      params: { musicStyle, musicStyleDetail }
+    } = this.props;
+    this.fetchData(musicStyle, musicStyleDetail);
+    fetchColor(musicStyle, this);
+  };
+
+  componentWillReceiveProps = (nextProps: any) => {
+    this.setState({ fetched: false });
+    this.fetchData(
+      nextProps.params.musicStyle,
+      nextProps.params.musicStyleDetail
+    );
+  };
 
   renderContent = () => {
     const {
       params: { musicStyle, musicStyleDetail }
     } = this.props;
+    const { musicStyleState } = this.state;
+
     switch (musicStyleDetail) {
       case "artists":
         return (
           <ArtistsComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
           />
         );
       case "anecdotes":
@@ -52,41 +87,26 @@ export default class MusicStyleDetailsComponent extends Component<
           <AnecdoteComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
+          />
+        );
+      case "influence":
+        return (
+          <InfluenceComponent
+            musicStyle={musicStyle}
+            musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
           />
         );
       case "links":
+      case "origin":
         return (
           <LinksComponent
             musicStyle={musicStyle}
             musicStyleDetail={musicStyleDetail}
+            musicStyleState={musicStyleState}
           />
         );
-      case "blues":
-        switch (musicStyleDetail) {
-          case "impact":
-            return (
-              <ImpactComponent
-                musicStyle={musicStyle}
-                musicStyleDetail={musicStyleDetail}
-              />
-            );
-          case "origine":
-            return (
-              <OriginComponent
-                musicStyle={musicStyle}
-                musicStyleDetail={musicStyleDetail}
-              />
-            );
-          case "theme":
-            return (
-              <ThemeComponent
-                musicStyle={musicStyle}
-                musicStyleDetail={musicStyleDetail}
-              />
-            );
-          default:
-        }
-        break;
       default:
     }
   };
@@ -96,10 +116,14 @@ export default class MusicStyleDetailsComponent extends Component<
       params: { musicStyle, musicStyleDetail },
       params
     } = this.props;
-
-    const styleColor = '#a80000';
+    const { musicStyleState, color, fetched } = this.state;
+    // console.log(musicStyleState, musicStyle);
+    const styleColor = color;
 
     const css = `
+      .flex {
+        display: ${fetched ? "flex" : "none"}!important;
+      }
       #header a.headerLink:before{
           background: ${styleColor};
       }
@@ -137,7 +161,7 @@ export default class MusicStyleDetailsComponent extends Component<
                 <h1>
                   <span>{pointFreeUpperCase(musicStyleDetail)}</span>
                 </h1>
-                {this.renderContent()}
+                {musicStyleState && this.renderContent()}
               </div>
               <ul className="navDetails">
                 {musicStyle === "blues" ? (
