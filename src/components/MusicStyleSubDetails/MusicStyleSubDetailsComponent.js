@@ -40,8 +40,10 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
   /**
    *  Function to create the musician links
    * @param {Array} musicians - The array of musicians
+   * @param {string} musicStyleDetail
    * @returns {Array<any>}
    */
+
   renderArtistsLinks = (
     musicians: Array<any>,
     authorName,
@@ -58,10 +60,12 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
               }}
               to={`/${musicStyle}/${musicDetail}/${musician.name}`}
             >
-              <Vinyle
+             {musicDetail === "artists" ? (
+                <Vinyle
                 img={musician.img}
                 alt={`${musician.name} musician logo`}
-              />
+              />) : (<img src={musician.img} alt={`${musician.name} logo`} />)}
+
             </Link>
           </div>
         )
