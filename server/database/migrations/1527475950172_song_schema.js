@@ -8,6 +8,7 @@ class SongSchema extends Schema {
     this.create("songs", table => {
       table.increments().unsigned();
       table.string("name");
+      table.string("music-style");
       table.string("author");
       table.string("src");
       table.string("img");

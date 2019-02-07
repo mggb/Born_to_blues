@@ -1,34 +1,19 @@
-//
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { propEq, filter, has, find } from "ramda";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import Vinyle from "../../utils/vinyle";
 import "./styles/MusicStyleSubDetailsComponent.css";
 
-// import musician logo
-import hendrix from "../../assets/img/vinyle-jimmi-hendrix.png";
-import presley from "../../assets/img/vinyle-elvis-presley.png";
-import stones from "../../assets/img/vinyle-rolling-stones.png";
+// Import fetch color util
+import fetchColor from "../../utils/fetch";
+
+// Import break Words
+import breakWords from "../../utils/breakWords";
 
 // import header Component
 import HeaderComponent from "../../utils/headerComponent";
 import AudioComponent from "./components/AudioComponent";
-
-/** Fake data */
-const MUSICIANS: Array<any> = [
-  {
-    logo: hendrix,
-    name: "hendrix"
-  },
-  {
-    logo: presley,
-    name: "presley"
-  },
-  {
-    logo: stones,
-    name: "stones"
-  }
-];
 
 type Props = {
   params: {
@@ -41,18 +26,15 @@ type Props = {
   }
 };
 
-type State = {};
+type State = {
+  musicStyleState: any
+};
 
-const SUB_DETAILS = ["instruments", "electric-guitar"];
-
-export default class MusicStyleSubDetailsComponent extends Component<
-  Props,
-  State
-> {
-  state = {};
-
-  filterNavSubDetails = (element: any) => {
-    SUB_DETAILS.filter(item => item !== element);
+class MusicStyleSubDetailsComponent extends Component<Props, State> {
+  state = {
+    musicStyleState: null,
+    navBarState: [],
+    indexDescription: 0
   };
 
   /**
@@ -60,51 +42,117 @@ export default class MusicStyleSubDetailsComponent extends Component<
    * @param {Array} musicians - The array of musicians
    * @returns {Array<any>}
    */
-  renderArtistsLinks = (musicians: Array<any>): Array<any> =>
-    musicians.map(musician => (
-      <div key={musician.name}>
-        <Link to={`/${musician.name}`}>
-          <Vinyle img={musician.logo} alt={`${musician.name} musician logo`} />
-        </Link>
-      </div>
-    ));
-
-  renderNavigationSubDetails = (
-    arrayElement,
+  renderArtistsLinks = (
+    musicians: Array<any>,
+    authorName,
     musicStyle,
-    musicDetail: {
-      arrayElement: Array<string>,
-      musicStyle: string,
-      musicDetail: string
-    }
+    musicDetail
   ): Array<any> =>
-    arrayElement.map(detail => (
-      <li key={detail}>
-        <Link to={`/${musicStyle}/${musicDetail}/${detail}`} />
+    musicians.map(
+      musician =>
+        authorName !== musician.name && (
+          <div key={musician.name}>
+            <Link
+              onClick={() => {
+                this.fetchData(musicStyle, musicDetail, musician.name);
+              }}
+              to={`/${musicStyle}/${musicDetail}/${musician.name}`}
+            >
+              <Vinyle
+                img={musician.img}
+                alt={`${musician.name} musician logo`}
+              />
+            </Link>
+          </div>
+        )
+    );
+
+  renderNavigationSubDetails = (arrayElement): Array<any> => {
+    const { indexDescription } = this.state;
+    return arrayElement.map((element, index) => (
+      <li key={Math.random()}>
+        <Link
+          className={indexDescription === index ? "active" : ""}
+          to=""
+          onClick={e => {
+            e.preventDefault();
+            this.setState({ indexDescription: index });
+          }}
+        />
       </li>
     ));
+  };
 
   _onReady = (event, player) => {
     // access to player in all event handlers via event.target
     // event.target.pauseVideo();
     this.setState({
       [player]: event.target
-    })
-  }
+    });
+  };
 
-  toggleMusic = (elm) => {
+  toggleMusic = elm => {
     let player = this.state[elm];
     if (player.getPlayerState() !== 1) {
-      player.playVideo()
+      player.playVideo();
     } else {
-      player.pauseVideo()
+      player.pauseVideo();
     }
-  }
+  };
+  componentWillMount = () => {
+    const {
+      params: { musicStyle, musicStyleDetail, musicStyleSubDetail }
+    } = this.props;
+    this.fetchData(musicStyle, musicStyleDetail, musicStyleSubDetail);
+    fetchColor(musicStyle, this);
+  };
+
+  playerAudio = anecdoteState =>
+    anecdoteState.map(element => (
+      <AudioComponent
+        videoId={
+          element.src.match(
+            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i
+          )[1]
+        }
+        music={element.name}
+        artist={element.author}
+      />
+    ));
+
+  fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
+    const hasSong = has("songs");
+
+    fetch(
+      `${process.env.REACT_APP_DB_URL}/api/${musicStyleDetail}/${musicStyle}`
+    )
+      .then(res => res.json())
+      .then(musicStyleState => {
+        this.setState({
+          navBarState: musicStyleState,
+          musicStyleState: find(propEq("name", musicStyleSubDetail))(
+            musicStyleState
+          )
+        });
+        if (musicStyleState.map(e => hasSong(e))) {
+          fetch(`${process.env.REACT_APP_DB_URL}/api/song/${musicStyle}`)
+            .then(res => res.json())
+            .then(songs => {
+              this.setState({
+                songs
+              });
+            });
+        }
+      });
+  };
+
+  toggleAudio = () => {};
 
   render() {
     const { params } = this.props;
+    const { color } = this.state;
 
-    const styleColor = '#a80000';
+    const styleColor = color;
 
     const css = `
       #header a.headerLink:before{
@@ -127,6 +175,15 @@ export default class MusicStyleSubDetailsComponent extends Component<
       }
     `;
 
+    const {
+      musicStyleState,
+      songs,
+      navBarState,
+      indexDescription
+    } = this.state;
+    const authorName = musicStyleState && musicStyleState.name;
+    const anecdoteState = songs && filter(propEq("author", authorName))(songs);
+
     return (
       <section>
         <style>{css}</style>
@@ -145,41 +202,27 @@ export default class MusicStyleSubDetailsComponent extends Component<
                 >
                   <i className="fas fa-long-arrow-alt-left" />
                 </Link>
-                <h2>phrase sur le groupe</h2>
+                <h2>{musicStyleState && musicStyleState.title}</h2>
                 <p className="text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                  cum deleniti dicta ipsum laudantium placeat repudiandae
-                  temporibus unde? Amet architecto culpa ipsum iste molestias
-                  odio optio sequi suscipit vitae voluptate. Lorem ipsum dolor
-                  sit amet, consectetur adipisicing elit. Amet cum deleniti
-                  dicta ipsum laudantium placeat repudiandae temporibus unde?
-                  Amet architecto culpa ipsum iste molestias odio optio sequi
-                  suscipit vitae voluptate. Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit. Amet cum deleniti dicta ipsum
-                  laudantium culpa ipsum iste molestias odio optio sequi
-                  suscipit vitae voluptate.
+                  {musicStyleState &&
+                    breakWords(musicStyleState.description)[indexDescription]}
                 </p>
-                <div>
-                  <AudioComponent
-                    videoId="tgbNymZ7vqY"
-                    music="Drift&apos;n Blues"
-                    artist="Eric Clapton"
-                  />
-                  <AudioComponent
-                    videoId="tgbNymZ7vqY"
-                    music="Drift&apos;n Blues"
-                    artist="Eric Clapton"
-                  />
-                </div>
+                <div>{songs && this.playerAudio(anecdoteState)}</div>
                 <ul className="navSubDetails">
-                  {this.renderNavigationSubDetails(
-                    SUB_DETAILS,
-                    params.musicStyle,
-                    params.musicStyleDetail
-                  )}
+                  {musicStyleState &&
+                    this.renderNavigationSubDetails(
+                      breakWords(musicStyleState.description)
+                    )}
                 </ul>
               </div>
-              <div className="nav">{this.renderArtistsLinks(MUSICIANS)}</div>
+              <div className="nav">
+                {this.renderArtistsLinks(
+                  navBarState,
+                  authorName,
+                  params.musicStyle,
+                  params.musicStyleDetail
+                )}
+              </div>
             </section>
           </div>
         </div>
@@ -187,3 +230,5 @@ export default class MusicStyleSubDetailsComponent extends Component<
     );
   }
 }
+
+export default withRouter(MusicStyleSubDetailsComponent);

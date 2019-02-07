@@ -21,7 +21,10 @@ class ArtistController {
 
   // Obtenir un style
   async fetchOne({ params, request, response }) {
-    const artist = await Artist.find(params.id);
+    const artist = await Database.table("artists").where(
+      "music-style",
+      params.id
+    );
 
     if (!artist) {
       Logger.error("%s - %s", request.method(), request.url());
