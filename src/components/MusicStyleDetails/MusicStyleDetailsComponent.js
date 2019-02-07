@@ -148,7 +148,7 @@ export default class MusicStyleDetailsComponent extends Component<
       #header a.headerLink:after{
           background: ${styleColor};
       }
-      #anecdote .text button {
+      #anecdote .buttonVideoToggle {
           background: ${styleColor};
       }
       #anecdote .nav a{
