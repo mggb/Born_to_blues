@@ -58,13 +58,15 @@ export default class MusicStyleDetailsComponent extends Component<
     } = this.props;
     let index = nav.indexOf(musicStyleDetail);
     index++;
+    let link = `/${musicStyle}/${nav[index]}`;
     if (index === undefined){
-      return `/${musicStyle}`;
+      link = `/${musicStyle}`;
     }
     if (musicStyle !== 'blues' && index >= nav.length - 1){
-      return '/blues';
+      link = '/blues';
+      return <Link className="NextButton" to={link}>Discover the Blues</Link>;
     }
-    return `/${musicStyle}/${nav[index]}`;
+    return <Link className="NextButton" to={link}>Next</Link>;
   }
 
   componentDidMount = () => {
@@ -189,7 +191,7 @@ export default class MusicStyleDetailsComponent extends Component<
                   currentDetail={musicStyleDetail}
                 />
               </ul>
-              <Link className="NextButton" to={musicStyle === "blues" ? this.getNextLink(BLUES_DETAILS) : this.getNextLink(MUSIC_DETAILS)}>Next</Link>
+              {musicStyle === "blues" ? this.getNextLink(BLUES_DETAILS) : this.getNextLink(MUSIC_DETAILS)}
             </div>
           )}
         </Context.Consumer>
