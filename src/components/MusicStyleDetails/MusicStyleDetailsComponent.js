@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from "react";
 import "./styles/MusicStyleDetailsComponent.css";
 import fetchColor from "../../utils/fetch";
@@ -27,7 +25,9 @@ type Props = {
 };
 
 type State = {
-  musicStyleState: any
+  musicStyleState: any,
+  color: string,
+  fetched: boolean
 };
 
 export default class MusicStyleDetailsComponent extends Component<
@@ -41,7 +41,9 @@ export default class MusicStyleDetailsComponent extends Component<
 
   fetchData = (musicStyle: string, musicStyleDetail: any) => {
     if (musicStyleDetail !== "impact" || musicStyleDetail !== "origine") {
-      fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
+      fetch(
+        `${process.env.REACT_APP_DB_URL}/api/${musicStyleDetail}/${musicStyle}`
+      )
         .then(res => res.json())
         .then(musicStyleState => {
           this.setState({ musicStyleState, fetched: true });

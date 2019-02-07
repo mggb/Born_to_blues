@@ -1,5 +1,5 @@
 const fetchColor = (musicStyle: string, ctx: any) => {
-  fetch(`http://127.0.0.1:3333/api/music-style/${musicStyle}`)
+  fetch(`${process.env.REACT_APP_DB_URL}/api/music-style/${musicStyle}`)
     .then(res => res.json())
     .then(musicStyleState => {
       ctx.setState({ color: musicStyleState[0].color });

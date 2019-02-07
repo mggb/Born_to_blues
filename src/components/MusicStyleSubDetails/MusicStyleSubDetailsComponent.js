@@ -123,7 +123,9 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
   fetchData = (musicStyle, musicStyleDetail, musicStyleSubDetail) => {
     const hasSong = has("songs");
 
-    fetch(`http://127.0.0.1:3333/api/${musicStyleDetail}/${musicStyle}`)
+    fetch(
+      `${process.env.REACT_APP_DB_URL}/api/${musicStyleDetail}/${musicStyle}`
+    )
       .then(res => res.json())
       .then(musicStyleState => {
         this.setState({
@@ -133,7 +135,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
           )
         });
         if (musicStyleState.map(e => hasSong(e))) {
-          fetch(`http://127.0.0.1:3333/api/song/${musicStyle}`)
+          fetch(`${process.env.REACT_APP_DB_URL}/api/song/${musicStyle}`)
             .then(res => res.json())
             .then(songs => {
               this.setState({
@@ -181,7 +183,7 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
     } = this.state;
     const authorName = musicStyleState && musicStyleState.name;
     const anecdoteState = songs && filter(propEq("author", authorName))(songs);
-    console.log(musicStyleState);
+
     return (
       <section>
         <style>{css}</style>

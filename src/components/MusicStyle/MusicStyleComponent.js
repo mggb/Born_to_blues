@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from "react";
 import pointFreeUpperCase from "../../utils/pointFreeUpperCase";
 import { NavigationDetails } from "../NavigationBar/index";
@@ -18,7 +16,11 @@ type Props = {
 };
 
 type State = {
-  musicStyle: any
+  musicStyle: {
+    description: string,
+    pitch: string,
+    img: string
+  }
 };
 
 /**
@@ -38,7 +40,7 @@ export default class MusicStyleComponent extends Component<Props, State> {
 
   componentDidMount = () => {
     const { params } = this.props;
-    fetch(`http://127.0.0.1:3333/api/music-style/${params}`)
+    fetch(`${process.env.REACT_APP_DB_URL}/api/music-style/${params}`)
       .then(res => res.json())
       .then(musicStyle => this.setState({ musicStyle: musicStyle[0] }));
   };
