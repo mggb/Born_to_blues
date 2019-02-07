@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./styles/MusicStyleDetailsComponent.css";
 import fetchColor from "../../utils/fetch";
 
@@ -50,6 +51,21 @@ export default class MusicStyleDetailsComponent extends Component<
         });
     }
   };
+
+  getNextLink = (nav) => {
+    const {
+      params: { musicStyle, musicStyleDetail }
+    } = this.props;
+    let index = nav.indexOf(musicStyleDetail);
+    index++;
+    if (index === undefined){
+      return `/${musicStyle}`;
+    }
+    if (musicStyle !== 'blues' && index >= nav.length - 1){
+      return '/blues';
+    }
+    return `/${musicStyle}/${nav[index]}`;
+  }
 
   componentDidMount = () => {
     const {
@@ -148,6 +164,9 @@ export default class MusicStyleDetailsComponent extends Component<
       #links a:before{
           background: ${styleColor};
       }
+      .NextButton {
+      border: 3px solid ${styleColor}
+      }
     `;
 
     return (
@@ -164,20 +183,13 @@ export default class MusicStyleDetailsComponent extends Component<
                 {musicStyleState && this.renderContent()}
               </div>
               <ul className="navDetails">
-                {musicStyle === "blues" ? (
-                  <NavigationDetails
-                    arrayElement={BLUES_DETAILS}
-                    musicStyle={musicStyle}
-                    currentDetail={musicStyleDetail}
-                  />
-                ) : (
-                  <NavigationDetails
-                    arrayElement={MUSIC_DETAILS}
-                    musicStyle={musicStyle}
-                    currentDetail={musicStyleDetail}
-                  />
-                )}
+                <NavigationDetails
+                  arrayElement={musicStyle === "blues" ? BLUES_DETAILS : MUSIC_DETAILS}
+                  musicStyle={musicStyle}
+                  currentDetail={musicStyleDetail}
+                />
               </ul>
+              <Link className="NextButton" to={musicStyle === "blues" ? this.getNextLink(BLUES_DETAILS) : this.getNextLink(MUSIC_DETAILS)}>Next</Link>
             </div>
           )}
         </Context.Consumer>

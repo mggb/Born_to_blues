@@ -353,3 +353,12 @@
 #anecdote.influence .text {
     width: 50%;
 }
+.NextButton {
+    position: absolute;
+    right: 150px;
+    bottom: 50px;
+    text-decoration: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
