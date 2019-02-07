@@ -60,12 +60,14 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
               }}
               to={`/${musicStyle}/${musicDetail}/${musician.name}`}
             >
-             {musicDetail === "artists" ? (
+              {musicDetail === "artists" ? (
                 <Vinyle
-                img={musician.img}
-                alt={`${musician.name} musician logo`}
-              />) : (<img src={musician.img} alt={`${musician.name} logo`} />)}
-
+                  img={musician.img}
+                  alt={`${musician.name} musician logo`}
+                />
+              ) : (
+                <img src={musician.img} alt={`${musician.name} logo`} />
+              )}
             </Link>
           </div>
         )
@@ -87,22 +89,6 @@ class MusicStyleSubDetailsComponent extends Component<Props, State> {
     ));
   };
 
-  _onReady = (event, player) => {
-    // access to player in all event handlers via event.target
-    // event.target.pauseVideo();
-    this.setState({
-      [player]: event.target
-    });
-  };
-
-  toggleMusic = elm => {
-    let player = this.state[elm];
-    if (player.getPlayerState() !== 1) {
-      player.playVideo();
-    } else {
-      player.pauseVideo();
-    }
-  };
   componentWillMount = () => {
     const {
       params: { musicStyle, musicStyleDetail, musicStyleSubDetail }
