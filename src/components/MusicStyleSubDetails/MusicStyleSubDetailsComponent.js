@@ -58,16 +58,23 @@ export default class MusicStyleSubDetailsComponent extends Component<
   /**
    *  Function to create the musician links
    * @param {Array} musicians - The array of musicians
+   * @param {string} musicStyleDetail
    * @returns {Array<any>}
    */
-  renderArtistsLinks = (musicians: Array<any>): Array<any> =>
-    musicians.map(musician => (
-      <div key={musician.name}>
-        <Link to={`/${musician.name}`}>
-          <Vinyle img={musician.logo} alt={`${musician.name} musician logo`} />
-        </Link>
-      </div>
-    ));
+  renderLinks = (musicians: Array<any>, musicStyleDetail: string): Array<any> =>
+    musicians.map(musician => {
+      let img = <img src={musician.logo} alt={`${musician.name} logo`} />;
+      if (musicStyleDetail === 'artists') {
+        img = <Vinyle img={musician.logo} alt={`${musician.name} logo`} />;
+      }
+      return(
+        <div key={musician.name}>
+          <Link to={`/${musician.name}`}>
+            {img}
+          </Link>
+        </div>
+      )
+    });
 
   renderNavigationSubDetails = (
     arrayElement,
@@ -179,7 +186,7 @@ export default class MusicStyleSubDetailsComponent extends Component<
                   )}
                 </ul>
               </div>
-              <div className="nav">{this.renderArtistsLinks(MUSICIANS)}</div>
+              <div className="nav">{this.renderLinks(MUSICIANS, params.musicStyleDetail)}</div>
             </section>
           </div>
         </div>
